@@ -22,8 +22,8 @@ import development.mobile.quanlygoimon.code.R;
 import development.mobile.quanlygoimon.code.entity.MonAn;
 
 public class DSMonAnFragment extends Fragment {
-    private List<MonAn> monAnLst;
-    private GridViewMonAnAdapter adapter = null;
+    private List<MonAn> monAnLst_DSMonAnFrag;
+    private GridViewMonAnAdapter adapter_DSMonAnFrag = null;
     private GridView monAnGridView;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
@@ -39,15 +39,17 @@ public class DSMonAnFragment extends Fragment {
 
         send = (SendMonAn) getActivity();
         monAnGridView = (GridView) view.findViewById(R.id.monAnGridView);
-        monAnLst = new ArrayList<MonAn>();
-        adapter = new GridViewMonAnAdapter(getActivity(), R.layout.item_monan, monAnLst);
-        monAnGridView.setAdapter(adapter);
+        monAnLst_DSMonAnFrag = new ArrayList<MonAn>();
+        adapter_DSMonAnFrag = new GridViewMonAnAdapter(getActivity(), R.layout.item_monan, monAnLst_DSMonAnFrag);
+        monAnGridView.setAdapter(adapter_DSMonAnFrag);
         getAllMonAn("Món ăn");
 
         monAnGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                send.sendMonAn(monAnLst.get(position));
+                System.out.println(monAnLst_DSMonAnFrag.get(position));
+
+                send.sendMonAn(monAnLst_DSMonAnFrag.get(position));
             }
         });
 
@@ -58,14 +60,14 @@ public class DSMonAnFragment extends Fragment {
         myRef.child("NhomHang").orderByChild("tenNhomHang").equalTo(tenNhomHang).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                monAnLst.clear();
+                monAnLst_DSMonAnFrag.clear();
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     for(DataSnapshot childOfChild : child.child("danhSachMonAn").getChildren()){
                         MonAn monAn = childOfChild.getValue(MonAn.class);
-                        monAnLst.add(monAn);
+                        monAnLst_DSMonAnFrag.add(monAn);
                     }
                 }
-                adapter.notifyDataSetChanged();
+                adapter_DSMonAnFrag.notifyDataSetChanged();
             }
 
             @Override

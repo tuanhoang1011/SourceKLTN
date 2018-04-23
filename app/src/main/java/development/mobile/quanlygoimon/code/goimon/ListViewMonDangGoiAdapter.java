@@ -22,14 +22,14 @@ import development.mobile.quanlygoimon.code.entity.MonAn;
 public class ListViewMonDangGoiAdapter extends ArrayAdapter<MonAn> {
     private Activity context = null;
     private int layoutID;
-    private List<MonAn> monAnLst = null;
+    private List<MonAn> monAnLst_DSMonDGFrag = null;
     private SendTongTien send;
 
     public ListViewMonDangGoiAdapter(Activity context, int textViewResourceId, List<MonAn> objects) {
         super(context, textViewResourceId, objects);
         this.context = context;
         this.layoutID = textViewResourceId;
-        this.monAnLst = objects;
+        this.monAnLst_DSMonDGFrag = objects;
     }
 
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -37,7 +37,7 @@ public class ListViewMonDangGoiAdapter extends ArrayAdapter<MonAn> {
         convertView = inflater.inflate(layoutID, null);
         send = (SendTongTien) context;
 
-        if (monAnLst.size() > 0 && position >= 0) {
+        if (monAnLst_DSMonDGFrag.size() > 0 && position >= 0) {
             final TextView tenMonTxtView_item = (TextView) convertView.findViewById(R.id.tenMonTxtView_item);
             final TextView giaTxtView_item = (TextView) convertView.findViewById(R.id.giaTxtView_item);
             final ImageButton minusBtn_item = (ImageButton) convertView.findViewById(R.id.minusBtn_item);
@@ -45,7 +45,7 @@ public class ListViewMonDangGoiAdapter extends ArrayAdapter<MonAn> {
             final TextView ghiChuTxtView_item = (TextView) convertView.findViewById(R.id.ghiChuTxtView_item);
             final EditText soLuongEditTxt_item = (EditText) convertView.findViewById(R.id.soLuongEditTxt_item);
             final String tempSoLuong;
-            final MonAn monAn = monAnLst.get(position);
+            final MonAn monAn = monAnLst_DSMonDGFrag.get(position);
 
             tenMonTxtView_item.setText(monAn.getTenMonAn());
             giaTxtView_item.setText(NumberFormat.getCurrencyInstance().format(monAn.getGia()));
@@ -69,7 +69,7 @@ public class ListViewMonDangGoiAdapter extends ArrayAdapter<MonAn> {
                         monAn.setGia(monAn.getGia() / soLuongCu);
                     }
                     else if(newVal.equals("0")){
-                        monAnLst.remove(position);
+                        monAnLst_DSMonDGFrag.remove(position);
                     }
                     else{
                         soLuongCu = monAn.getSoLuong();

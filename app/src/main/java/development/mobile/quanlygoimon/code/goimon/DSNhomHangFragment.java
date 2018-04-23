@@ -22,7 +22,7 @@ import development.mobile.quanlygoimon.code.R;
 
 public class DSNhomHangFragment extends Fragment {
     private List<String> nhomHangLst;
-    private ListViewNhomHangAdapter adapter = null;
+    private ListViewNhomHangAdapter adapter_DSNhomHangFrag = null;
     private ListView nhomHangLstView;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
@@ -38,17 +38,17 @@ public class DSNhomHangFragment extends Fragment {
         send = (SendTenNhomHang) getActivity();
         nhomHangLstView = (ListView) view.findViewById(R.id.nhomHangLstView);
         nhomHangLst = new ArrayList<String>();
-        adapter = new ListViewNhomHangAdapter(getActivity(), R.layout.item_nhomhang, nhomHangLst);
-        nhomHangLstView.setAdapter(adapter);
+        adapter_DSNhomHangFrag = new ListViewNhomHangAdapter(getActivity(), R.layout.item_nhomhang, nhomHangLst);
+        nhomHangLstView.setAdapter(adapter_DSNhomHangFrag);
         getAllNhomHang();
 
         nhomHangLstView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(adapter.positionSelected != position){
+                if(adapter_DSNhomHangFrag.positionSelected != position){
                     send.senTenNhomHang(nhomHangLst.get(position));
-                    adapter.positionSelected = position;
-                    adapter.notifyDataSetChanged();
+                    adapter_DSNhomHangFrag.positionSelected = position;
+                    adapter_DSNhomHangFrag.notifyDataSetChanged();
                 }
             }
         });
@@ -65,7 +65,7 @@ public class DSNhomHangFragment extends Fragment {
                     tenNhomHang = child.child("tenNhomHang").getValue(String.class);
                     nhomHangLst.add(tenNhomHang);
                 }
-                adapter.notifyDataSetChanged();
+                adapter_DSNhomHangFrag.notifyDataSetChanged();
             }
 
             @Override

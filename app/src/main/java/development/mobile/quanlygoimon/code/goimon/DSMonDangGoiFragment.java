@@ -19,8 +19,8 @@ import development.mobile.quanlygoimon.code.R;
 import development.mobile.quanlygoimon.code.entity.MonAn;
 
 public class DSMonDangGoiFragment extends Fragment {
-    private List<MonAn> monAnLst;
-    private ListViewMonDangGoiAdapter adapter = null;
+    private List<MonAn> monAnLst_DSMonDGFrag;
+    private ListViewMonDangGoiAdapter adapter_DSMonDGFrag = null;
     private ListView monDGLsrView_monDGFrag;
 
     public DSMonDangGoiFragment() {
@@ -31,9 +31,9 @@ public class DSMonDangGoiFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dsmondanggoi, container, false);
 
         monDGLsrView_monDGFrag = (ListView) view.findViewById(R.id.monDGLsrView_monDGFrag);
-        monAnLst = new ArrayList<MonAn>();
-        adapter = new ListViewMonDangGoiAdapter(getActivity(), R.layout.item_mondanggoi, monAnLst);
-        monDGLsrView_monDGFrag.setAdapter(adapter);
+        monAnLst_DSMonDGFrag = new ArrayList<MonAn>();
+        adapter_DSMonDGFrag = new ListViewMonDangGoiAdapter(getActivity(), R.layout.item_mondanggoi, monAnLst_DSMonDGFrag);
+        monDGLsrView_monDGFrag.setAdapter(adapter_DSMonDGFrag);
 
         monDGLsrView_monDGFrag.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -63,8 +63,8 @@ public class DSMonDangGoiFragment extends Fragment {
                 okBtn_dialogChange.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        monAnLst.get(position).setGhiChu(ghiChuEditTxt_dialogChange.getText().toString());
-                        adapter.notifyDataSetChanged();
+                        monAnLst_DSMonDGFrag.get(position).setGhiChu(ghiChuEditTxt_dialogChange.getText().toString());
+                        adapter_DSMonDGFrag.notifyDataSetChanged();
                         dialog.dismiss();
                     }
                 });
@@ -78,19 +78,16 @@ public class DSMonDangGoiFragment extends Fragment {
     }
 
     public void getMonAnFromDSMonAnFrag(MonAn monAn) {
-        System.out.println(monAn.getGia());
-
-        if (monAnLst.contains(monAn)) {
-            int index = monAnLst.indexOf(monAn);
-
-            MonAn monAn1 = monAnLst.get(index);
+        if (monAnLst_DSMonDGFrag.contains(monAn)) {
+            int index = monAnLst_DSMonDGFrag.indexOf(monAn);
+            MonAn monAn1 = monAnLst_DSMonDGFrag.get(index);
             monAn1.setSoLuong(monAn1.getSoLuong() + 1);
             System.out.println(monAn1.getGia() + "---" +  monAn.getGia());
-            monAn1.setGia(monAn1.getGia() + monAn.getGia());
+            monAn1.setGia(monAn1.getGia() + 70000);
         } else {
             monAn.setSoLuong(1);
-            monAnLst.add(monAn);
+            monAnLst_DSMonDGFrag.add(monAn);
         }
-        adapter.notifyDataSetChanged();
+        adapter_DSMonDGFrag.notifyDataSetChanged();
     }
 }
