@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <TextView
+            android:id="@+id/tenMonTxtView_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="3"
+            android:gravity="left|center"
+            android:text="Tên món"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/giaTxtView_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="3dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="Giá "
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@+id/minusBtn_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/icon_minus" />
+
+        <EditText
+            android:id="@+id/soLuongEditTxt_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="textPersonName|number"
+            android:text="1"
+            android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@+id/plusBtn_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/icon_plus" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/ghiChuTxtView_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:text="Ghi chú" />
+
+</LinearLayout>
