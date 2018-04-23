@@ -1,6 +1,7 @@
 package development.mobile.quanlygoimon.code.goimon;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -42,6 +43,7 @@ public class ListViewMonDangGoiAdapter extends ArrayAdapter<MonAn> {
             final TextView giaTxtView_item = (TextView) convertView.findViewById(R.id.giaTxtView_item);
             final ImageButton minusBtn_item = (ImageButton) convertView.findViewById(R.id.minusBtn_item);
             final ImageButton plusBtn_item = (ImageButton) convertView.findViewById(R.id.plusBtn_item);
+            final ImageButton noteBtn_item = (ImageButton) convertView.findViewById(R.id.noteBtn_item);
             final TextView ghiChuTxtView_item = (TextView) convertView.findViewById(R.id.ghiChuTxtView_item);
             final EditText soLuongEditTxt_item = (EditText) convertView.findViewById(R.id.soLuongEditTxt_item);
             final String tempSoLuong;
@@ -76,12 +78,48 @@ public class ListViewMonDangGoiAdapter extends ArrayAdapter<MonAn> {
                         monAn.setSoLuong(Integer.parseInt(newVal));
                         monAn.setGia((monAn.getGia() / soLuongCu) * monAn.getSoLuong());
                     }
-                    send.senTongTien(monAn.getGia() - tongTienCu);
+                    send.sendTongTien(monAn.getGia() - tongTienCu);
                     notifyDataSetChanged();
                 }
 
                 @Override
                 public void afterTextChanged(Editable s) {
+                }
+            });
+
+            noteBtn_item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final Dialog dialog = new Dialog(context);
+                    dialog.setContentView(R.layout.dialog_changeinfomonan);
+
+                    final TextView ghiChuTitle_dialogChange = (TextView) dialog.findViewById(R.id.ghiChuTitle_dialogChange);
+                    final EditText ghiChuEditTxt_dialogChange = (EditText) dialog.findViewById(R.id.ghiChuEditTxt_dialogChange);
+                    Button huyBtn_dialogChange = (Button) dialog.findViewById(R.id.huyBtn_dialogChange);
+                    Button okBtn_dialogChange = (Button) dialog.findViewById(R.id.okBtn_dialogChange);
+
+                    ghiChuTitle_dialogChange.setText("Ghi chú " + monAn.getTenMonAn());
+                    ghiChuEditTxt_dialogChange.setText(monAn.getGhiChu());
+                    ghiChuEditTxt_dialogChange.requestFocus();
+
+                    huyBtn_dialogChange.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    okBtn_dialogChange.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            monAnLst_DSMonDGFrag.get(position).setGhiChu(ghiChuEditTxt_dialogChange.getText().toString());
+                            notifyDataSetChanged();
+                            dialog.dismiss();
+                        }
+                    });
+
+                    dialog.show();
+                    dialog.getWindow().setLayout(900, 450);
                 }
             });
         }
@@ -90,6 +128,6 @@ public class ListViewMonDangGoiAdapter extends ArrayAdapter<MonAn> {
     }
 
     interface SendTongTien {
-        void senTongTien(double tongTienMonAnMoi);
+        void sendTongTien(double tongTienMonAnMoi);
     }
 }

@@ -35,45 +35,6 @@ public class DSMonDangGoiFragment extends Fragment {
         adapter_DSMonDGFrag = new ListViewMonDangGoiAdapter(getActivity(), R.layout.item_mondanggoi, monAnLst_DSMonDGFrag);
         monDGLsrView_monDGFrag.setAdapter(adapter_DSMonDGFrag);
 
-        monDGLsrView_monDGFrag.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                View view1 = monDGLsrView_monDGFrag.getChildAt(position);
-                TextView tempGhiChu = (TextView) view1.findViewById(R.id.ghiChuTxtView_item);
-                TextView tempTenMon = (TextView) view1.findViewById(R.id.tenMonTxtView_item);
-                final Dialog dialog = new Dialog(getActivity());
-                dialog.setContentView(R.layout.dialog_changeinfomonan);
-
-                final TextView ghiChuTitle_dialogChange = (TextView) dialog.findViewById(R.id.ghiChuTitle_dialogChange);
-                final EditText ghiChuEditTxt_dialogChange = (EditText) dialog.findViewById(R.id.ghiChuEditTxt_dialogChange);
-                Button huyBtn_dialogChange = (Button) dialog.findViewById(R.id.huyBtn_dialogChange);
-                Button okBtn_dialogChange = (Button) dialog.findViewById(R.id.okBtn_dialogChange);
-
-                ghiChuTitle_dialogChange.setText("Ghi chú " + tempTenMon.getText());
-                ghiChuEditTxt_dialogChange.setText(tempGhiChu.getText());
-                ghiChuEditTxt_dialogChange.requestFocus();
-
-                huyBtn_dialogChange.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-
-                okBtn_dialogChange.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        monAnLst_DSMonDGFrag.get(position).setGhiChu(ghiChuEditTxt_dialogChange.getText().toString());
-                        adapter_DSMonDGFrag.notifyDataSetChanged();
-                        dialog.dismiss();
-                    }
-                });
-
-                dialog.show();
-                dialog.getWindow().setLayout(900, 450);
-            }
-        });
-
         return view;
     }
 

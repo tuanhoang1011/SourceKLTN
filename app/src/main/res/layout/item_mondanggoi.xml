@@ -65,11 +65,28 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/ghiChuTxtView_item"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:text="Ghi chú" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <ImageButton
+            android:id="@+id/noteBtn_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/icon_note" />
+
+        <TextView
+            android:id="@+id/ghiChuTxtView_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="9"
+            android:text="Ghi chú" />
+    </LinearLayout>
 
 </LinearLayout>

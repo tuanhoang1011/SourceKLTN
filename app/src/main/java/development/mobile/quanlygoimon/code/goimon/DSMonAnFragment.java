@@ -47,8 +47,6 @@ public class DSMonAnFragment extends Fragment {
         monAnGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println(monAnLst_DSMonAnFrag.get(position));
-
                 send.sendMonAn(monAnLst_DSMonAnFrag.get(position));
             }
         });

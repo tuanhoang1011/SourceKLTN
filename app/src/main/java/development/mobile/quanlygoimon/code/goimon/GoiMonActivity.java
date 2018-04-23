@@ -19,8 +19,6 @@ import development.mobile.quanlygoimon.code.goimon.DSNhomHangFragment.SendTenNho
 import development.mobile.quanlygoimon.code.goimon.ListViewMonDangGoiAdapter.SendTongTien;
 
 public class GoiMonActivity extends AppCompatActivity implements SendTenNhomHang, SendMonAn, SendTongTien {
-    private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private DatabaseReference myRef = database.getReference();
     private ArrayList<String> banSelected = new ArrayList<String>();
     private TextView dsBanTxtView, soBanTxtView, tongTienTxtView;
     private double tongTien = 0;
@@ -62,13 +60,13 @@ public class GoiMonActivity extends AppCompatActivity implements SendTenNhomHang
     }
 
     @Override
-    public void senTenNhomHang(String tenNhomHang) {
+    public void sendTenNhomHang(String tenNhomHang) {
         DSMonAnFragment dsMonAnFrag = (DSMonAnFragment) getSupportFragmentManager().findFragmentById(R.id.monAnFrag);
         dsMonAnFrag.getTenNhomHangFromDSNhomHangFrag(tenNhomHang);
     }
 
     @Override
-    public void senTongTien(double tongTienMonAnMoi) {
+    public void sendTongTien(double tongTienMonAnMoi) {
         tongTienTxtView.setText(NumberFormat.getCurrencyInstance().format(tongTien + tongTienMonAnMoi));
     }
 }

@@ -46,7 +46,7 @@ public class DSNhomHangFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(adapter_DSNhomHangFrag.positionSelected != position){
-                    send.senTenNhomHang(nhomHangLst.get(position));
+                    send.sendTenNhomHang(nhomHangLst.get(position));
                     adapter_DSNhomHangFrag.positionSelected = position;
                     adapter_DSNhomHangFrag.notifyDataSetChanged();
                 }
@@ -76,6 +76,6 @@ public class DSNhomHangFragment extends Fragment {
     }
 
     interface SendTenNhomHang {
-        void senTenNhomHang(String tenNhomHang);
+        void sendTenNhomHang(String tenNhomHang);
     }
 }
