@@ -19,10 +19,10 @@ public class PagerAdapterBep extends FragmentPagerAdapter {
 
         switch (position) {
             case 0:
-                frag = new BanTrongFragment();
+                frag = new TaiBanFragment();
                 break;
             case 1:
-                frag = new BanDangPhucVuFragment();
+                frag = new DatTruocFragment();
                 break;
         }
         return frag;
@@ -39,10 +39,10 @@ public class PagerAdapterBep extends FragmentPagerAdapter {
         String title = "";
         switch (position) {
             case 0:
-                title = "Bàn trống";
+                title = "Tại bàn";
                 break;
             case 1:
-                title = "Bàn đang phục vụ";
+                title = "Đặt trước";
                 break;
         }
 
