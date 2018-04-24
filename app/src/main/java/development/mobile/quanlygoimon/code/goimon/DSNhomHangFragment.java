@@ -39,7 +39,7 @@ public class DSNhomHangFragment extends Fragment {
         send = (SendTenNhomHang) getActivity();
         nhomHangLstView = (ListView) view.findViewById(R.id.nhomHangLstView);
         nhomHangLst = new ArrayList<String>();
-        adapter_DSNhomHangFrag = new ListViewNhomHangAdapter(getActivity(), R.layout.item_nhomhang, nhomHangLst);
+        adapter_DSNhomHangFrag = new ListViewNhomHangAdapter((GoiMonActivity)getActivity(), R.layout.item_nhomhang, nhomHangLst);
         nhomHangLstView.setAdapter(adapter_DSNhomHangFrag);
         getAllNhomHang();
 

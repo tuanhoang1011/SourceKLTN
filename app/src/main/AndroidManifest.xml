@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="development.mobile.quanlygoimon.code">
 
@@ -15,9 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".phucvuchonban.PhucVuActivity" />
-        <activity android:name=".goimon.GoiMonActivity">
-
-        </activity>
+        <activity android:name=".phucvuchonban.PhucVuActivity"/>
+        <activity android:name=".goimon.GoiMonActivity"/>
     </application>
+
 </manifest>

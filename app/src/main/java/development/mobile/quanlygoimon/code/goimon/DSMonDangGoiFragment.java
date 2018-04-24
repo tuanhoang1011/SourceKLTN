@@ -19,8 +19,7 @@ import development.mobile.quanlygoimon.code.R;
 import development.mobile.quanlygoimon.code.entity.MonAn;
 
 public class DSMonDangGoiFragment extends Fragment {
-    private List<MonAn> monAnLst_DSMonDGFrag;
-    private List<MonAn> monAnLst_DSMonDGFraga = new ArrayList<>();
+    public List<MonAn> monAnLst_DSMonDGFrag;
     private ListViewMonDangGoiAdapter adapter_DSMonDGFrag = null;
     private ListView monDGLsrView_monDGFrag;
 
@@ -33,7 +32,7 @@ public class DSMonDangGoiFragment extends Fragment {
 
         monDGLsrView_monDGFrag = (ListView) view.findViewById(R.id.monDGLsrView_monDGFrag);
         monAnLst_DSMonDGFrag = new ArrayList<>();
-        adapter_DSMonDGFrag = new ListViewMonDangGoiAdapter(getActivity(), R.layout.item_mondanggoi, monAnLst_DSMonDGFrag);
+        adapter_DSMonDGFrag = new ListViewMonDangGoiAdapter((GoiMonActivity)getActivity(), R.layout.item_mondanggoi, monAnLst_DSMonDGFrag);
         monDGLsrView_monDGFrag.setAdapter(adapter_DSMonDGFrag);
 
         return view;
@@ -42,14 +41,18 @@ public class DSMonDangGoiFragment extends Fragment {
     public void getMonAnFromDSMonAnFrag(MonAn monAn) {
         if (monAnLst_DSMonDGFrag.contains(monAn)) {
             int index = monAnLst_DSMonDGFrag.indexOf(monAn);
-            System.out.println(monAnLst_DSMonDGFrag);
-            System.out.println(monAnLst_DSMonDGFraga);
             MonAn monAn1 = monAnLst_DSMonDGFrag.get(index);
             monAn1.setSoLuong(monAn1.getSoLuong() + 1);
             monAn1.setGia(monAn1.getGia() + monAn.getGia());
         } else {
-            monAn.setSoLuong(1);
-            monAnLst_DSMonDGFrag.add(monAn);
+            MonAn monAn2 = new MonAn();
+            monAn2.setMaMonAn(monAn.getMaMonAn());
+            monAn2.setTenMonAn(monAn.getTenMonAn());
+            monAn2.setGia(monAn.getGia());
+            monAn2.setSoLuong(1);
+            monAn2.setGhiChu("");
+            monAn2.setLoai(monAn.getLoai());
+            monAnLst_DSMonDGFrag.add(monAn2);
         }
         adapter_DSMonDGFrag.notifyDataSetChanged();
     }

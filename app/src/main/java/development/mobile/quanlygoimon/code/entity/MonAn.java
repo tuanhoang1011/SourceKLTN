@@ -11,11 +11,12 @@ public class MonAn {
     private boolean trangThai;
     private int soLuong;
     private String ghiChu;
+    private String pushKey;
 
     public MonAn() {
     }
 
-    public MonAn(int maMonAn, int maNhomHang, String tenMonAn, double gia, String loai, boolean trangThai, int soLuong) {
+    public MonAn(int maMonAn, int maNhomHang, String tenMonAn, double gia, String loai, boolean trangThai, int soLuong, String ghiChu, String pushKey) {
         this.maMonAn = maMonAn;
         this.maNhomHang = maNhomHang;
         this.tenMonAn = tenMonAn;
@@ -23,6 +24,8 @@ public class MonAn {
         this.loai = loai;
         this.trangThai = trangThai;
         this.soLuong = soLuong;
+        this.ghiChu = ghiChu;
+        this.pushKey = pushKey;
     }
 
     public int getMaMonAn() {
@@ -89,6 +92,14 @@ public class MonAn {
         this.ghiChu = ghiChu;
     }
 
+    public String getPushKey() {
+        return pushKey;
+    }
+
+    public void setPushKey(String pushKey) {
+        this.pushKey = pushKey;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -113,7 +124,8 @@ public class MonAn {
                 ", loai='" + loai + '\'' +
                 ", trangThai=" + trangThai +
                 ", soLuong=" + soLuong +
-                ", ghiChu=" + ghiChu +
+                ", ghiChu='" + ghiChu + '\'' +
+                ", pushKey='" + pushKey + '\'' +
                 '}';
     }
 }

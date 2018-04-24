@@ -1,19 +1,23 @@
 package development.mobile.quanlygoimon.code.entity;
 
+import java.util.Objects;
+
 public class Ban {
     private String maBan;
     private String maKhuVuc;
     private String maHoaDon;
     private String trangThai;
+    private String pushKey;
 
     public Ban() {
     }
 
-    public Ban(String maBan, String maKhuVuc, String maHoaDon, String trangThai) {
+    public Ban(String maBan, String maKhuVuc, String maHoaDon, String trangThai, String pushKey) {
         this.maBan = maBan;
         this.maKhuVuc = maKhuVuc;
         this.maHoaDon = maHoaDon;
         this.trangThai = trangThai;
+        this.pushKey = pushKey;
     }
 
     public Ban(String maBan, String maHoaDon, String trangThai) {
@@ -54,6 +58,14 @@ public class Ban {
         this.trangThai = trangThai;
     }
 
+    public String getPushKey() {
+        return pushKey;
+    }
+
+    public void setPushKey(String pushKey) {
+        this.pushKey = pushKey;
+    }
+
     @Override
     public String toString() {
         return "Ban{" +
@@ -61,6 +73,7 @@ public class Ban {
                 ", maKhuVuc='" + maKhuVuc + '\'' +
                 ", maHoaDon='" + maHoaDon + '\'' +
                 ", trangThai='" + trangThai + '\'' +
+                ", pushKey='" + pushKey + '\'' +
                 '}';
     }
 }

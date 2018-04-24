@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText maNVEditTxt, passEditTxt;
     private Button loginBtn;
-    private String maNV, password, pushKey, chucVu;
+    private String maNV, password, pushKey, chucVu, tenNV;
     private boolean dangNhap = false;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        readPreferences();
         setOrientation();
 
         maNVEditTxt = (EditText) findViewById(R.id.maNVEditTxt);
@@ -56,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                                     pushKey = child.getKey();
                                     dangNhap = child.child("dangNhap").getValue(Boolean.class);
                                     chucVu = child.child("chucVu").getValue(String.class);
+                                    tenNV = child.child("tenNhanVien").getValue(String.class);
                                 }
 
                                 myRef.child("NhanVien").orderByChild("matKhau").equalTo(password).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -70,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     Toast.makeText(LoginActivity.this, "Nhân viên này hiện đang đăng nhập. Vui lòng đăng xuất trước khi đăng nhập lại!", Toast.LENGTH_SHORT).show();
                                                 } else {
                                                     myRef.child("NhanVien").child(pushKey).child("dangNhap").setValue(true);
+                                                    writePreferences();
                                                     if (chucVu.trim().equals("PhucVu")) {
                                                         Intent intent = new Intent(LoginActivity.this, PhucVuActivity.class);
                                                         startActivity(intent);
@@ -77,9 +80,9 @@ public class LoginActivity extends AppCompatActivity {
                                                     }
                                                 }
                                             } else {
-                                                if(chucVu.equals("PhucVu")){
+                                                if (chucVu.equals("PhucVu")) {
                                                     Toast.makeText(LoginActivity.this, "Nhân viên " + chucVu + " chỉ có thể đăng nhập trên các thiết bị di động!", Toast.LENGTH_SHORT).show();
-                                                }else{
+                                                } else {
                                                     Toast.makeText(LoginActivity.this, "Nhân viên " + chucVu + " chỉ có thể đăng nhập trên các thiết bị máy tính bảng!", Toast.LENGTH_SHORT).show();
                                                 }
                                             }
@@ -108,31 +111,22 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        writePreferences();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        readPreferences();
-    }
-
-    public void writePreferences(){
-        SharedPreferences sharePre = getSharedPreferences("mySharePre", MODE_PRIVATE);
+    public void writePreferences() {
+        SharedPreferences sharePre = this.getSharedPreferences("mySharePre", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharePre.edit();
 
-        editor.putBoolean("isLoggedIin", true);
-        editor.commit();
+        editor.putBoolean("isLoggedIn", true);
+        editor.putString("pushKeyNhanVien", pushKey);
+        editor.putString("maNhanVien", maNV);
+        editor.putString("tenNhanVien", tenNV);
+        editor.apply();
     }
 
-    public void readPreferences(){
-        SharedPreferences sharePre = getSharedPreferences("mySharePre", MODE_PRIVATE);
-        boolean isLoggedIin = sharePre.getBoolean("isLoggedIin", false);
+    public void readPreferences() {
+        SharedPreferences sharePre = this.getSharedPreferences("mySharePre", MODE_PRIVATE);
+        boolean isLoggedIin = sharePre.getBoolean("isLoggedIn", false);
 
-        if(isLoggedIin){
+        if (isLoggedIin) {
             Intent intent = new Intent(LoginActivity.this, PhucVuActivity.class);
             startActivity(intent);
             finish();
