@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import development.mobile.quanlygoimon.code.R;
+import development.mobile.quanlygoimon.code.bep.BepActivity;
 import development.mobile.quanlygoimon.code.phucvuchonban.PhucVuActivity;
 
 public class LoginActivity extends AppCompatActivity {
@@ -72,6 +73,10 @@ public class LoginActivity extends AppCompatActivity {
                                                     myRef.child("NhanVien").child(pushKey).child("dangNhap").setValue(true);
                                                     if (chucVu.trim().equals("PhucVu")) {
                                                         Intent intent = new Intent(LoginActivity.this, PhucVuActivity.class);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    } else if (chucVu.trim().equals("Bep")) {
+                                                        Intent intent = new Intent(LoginActivity.this, BepActivity.class);
                                                         startActivity(intent);
                                                         finish();
                                                     }
