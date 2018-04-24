@@ -20,6 +20,7 @@ import development.mobile.quanlygoimon.code.entity.MonAn;
 
 public class DSMonDangGoiFragment extends Fragment {
     private List<MonAn> monAnLst_DSMonDGFrag;
+    private List<MonAn> monAnLst_DSMonDGFraga = new ArrayList<>();
     private ListViewMonDangGoiAdapter adapter_DSMonDGFrag = null;
     private ListView monDGLsrView_monDGFrag;
 
@@ -31,7 +32,7 @@ public class DSMonDangGoiFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dsmondanggoi, container, false);
 
         monDGLsrView_monDGFrag = (ListView) view.findViewById(R.id.monDGLsrView_monDGFrag);
-        monAnLst_DSMonDGFrag = new ArrayList<MonAn>();
+        monAnLst_DSMonDGFrag = new ArrayList<>();
         adapter_DSMonDGFrag = new ListViewMonDangGoiAdapter(getActivity(), R.layout.item_mondanggoi, monAnLst_DSMonDGFrag);
         monDGLsrView_monDGFrag.setAdapter(adapter_DSMonDGFrag);
 
@@ -41,10 +42,11 @@ public class DSMonDangGoiFragment extends Fragment {
     public void getMonAnFromDSMonAnFrag(MonAn monAn) {
         if (monAnLst_DSMonDGFrag.contains(monAn)) {
             int index = monAnLst_DSMonDGFrag.indexOf(monAn);
+            System.out.println(monAnLst_DSMonDGFrag);
+            System.out.println(monAnLst_DSMonDGFraga);
             MonAn monAn1 = monAnLst_DSMonDGFrag.get(index);
             monAn1.setSoLuong(monAn1.getSoLuong() + 1);
-            System.out.println(monAn1.getGia() + "---" +  monAn.getGia());
-            monAn1.setGia(monAn1.getGia() + 70000);
+            monAn1.setGia(monAn1.getGia() + monAn.getGia());
         } else {
             monAn.setSoLuong(1);
             monAnLst_DSMonDGFrag.add(monAn);

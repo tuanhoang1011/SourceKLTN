@@ -53,10 +53,10 @@ public class GoiMonActivity extends AppCompatActivity implements SendTenNhomHang
 
     @Override
     public void sendMonAn(MonAn monAn) {
-        DSMonDangGoiFragment dsMonDangGoiFrag = (DSMonDangGoiFragment) getSupportFragmentManager().findFragmentById(R.id.monDangGoiFrag);
-        dsMonDangGoiFrag.getMonAnFromDSMonAnFrag(monAn);
         tongTien += monAn.getGia();
         tongTienTxtView.setText(NumberFormat.getCurrencyInstance().format(tongTien));
+        DSMonDangGoiFragment dsMonDangGoiFrag = (DSMonDangGoiFragment) getSupportFragmentManager().findFragmentById(R.id.monDangGoiFrag);
+        dsMonDangGoiFrag.getMonAnFromDSMonAnFrag(monAn);
     }
 
     @Override
@@ -67,6 +67,7 @@ public class GoiMonActivity extends AppCompatActivity implements SendTenNhomHang
 
     @Override
     public void sendTongTien(double tongTienMonAnMoi) {
+        System.out.print(tongTien + "=========" + tongTienMonAnMoi);
         tongTienTxtView.setText(NumberFormat.getCurrencyInstance().format(tongTien + tongTienMonAnMoi));
     }
 }
