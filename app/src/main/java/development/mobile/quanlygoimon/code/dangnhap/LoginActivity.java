@@ -75,7 +75,8 @@ public class LoginActivity extends AppCompatActivity {
                                                         Intent intent = new Intent(LoginActivity.this, PhucVuActivity.class);
                                                         startActivity(intent);
                                                         finish();
-                                                    } else if (chucVu.trim().equals("Bep")) {
+                                                    }
+                                                    if (chucVu.trim().equals("Bep")) {
                                                         Intent intent = new Intent(LoginActivity.this, BepActivity.class);
                                                         startActivity(intent);
                                                         finish();
@@ -116,13 +117,13 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        writePreferences();
+//        writePreferences();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        readPreferences();
+//        readPreferences();
     }
 
     public void writePreferences(){

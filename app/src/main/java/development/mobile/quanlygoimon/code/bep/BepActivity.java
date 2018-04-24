@@ -15,9 +15,9 @@ import development.mobile.quanlygoimon.code.phucvuchonban.PagerAdapter;
 
 public class BepActivity extends AppCompatActivity {
 
-    private ViewPager pager;
-    private PagerAdapter adapter;
-    private TabLayout tabLayout;
+    private ViewPager pagerBep;
+    private PagerAdapterBep adapterBep;
+    private TabLayout tabLayoutBep;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
 
@@ -28,14 +28,14 @@ public class BepActivity extends AppCompatActivity {
 
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        pager = (ViewPager) findViewById(R.id.view_pager_bep);
-        tabLayout = (TabLayout) findViewById(R.id.tab_layout_bep);
+        pagerBep = (ViewPager) findViewById(R.id.view_pager_bep);
+        tabLayoutBep = (TabLayout) findViewById(R.id.tab_layout_bep);
 
         FragmentManager manager = getSupportFragmentManager();
-        adapter = new PagerAdapter(manager);
-        pager.setAdapter(adapter);
+        adapterBep = new PagerAdapterBep(manager);
+        pagerBep.setAdapter(adapterBep);
 
-        tabLayout.setupWithViewPager(pager);
-        pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayoutBep.setupWithViewPager(pagerBep);
+        pagerBep.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayoutBep));
     }
 }
