@@ -20,6 +20,7 @@ import java.util.List;
 
 import development.mobile.quanlygoimon.code.R;
 import development.mobile.quanlygoimon.code.entity.MonAn;
+import development.mobile.quanlygoimon.code.entity.NhomHang;
 
 public class DSMonAnFragment extends Fragment {
     private List<MonAn> monAnLst_DSMonAnFrag;
@@ -39,7 +40,7 @@ public class DSMonAnFragment extends Fragment {
 
         send = (SendMonAn) getActivity();
         monAnGridView = (GridView) view.findViewById(R.id.monAnGridView);
-        monAnLst_DSMonAnFrag = new ArrayList<MonAn>();
+        monAnLst_DSMonAnFrag = new ArrayList<>();
         adapter_DSMonAnFrag = new GridViewMonAnAdapter(getActivity(), R.layout.item_monan, monAnLst_DSMonAnFrag);
         monAnGridView.setAdapter(adapter_DSMonAnFrag);
         getAllMonAn("Món ăn");
@@ -47,7 +48,8 @@ public class DSMonAnFragment extends Fragment {
         monAnGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                send.sendMonAn(monAnLst_DSMonAnFrag.get(position));
+                System.out.println(monAnLst_DSMonAnFrag);
+                send.sendMonAn(monAnLst_DSMonAnFrag.get(0));
             }
         });
 

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import development.mobile.quanlygoimon.code.R;
+import development.mobile.quanlygoimon.code.entity.NhomHang;
 
 public class DSNhomHangFragment extends Fragment {
     private List<String> nhomHangLst;
