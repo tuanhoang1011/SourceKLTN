@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +18,13 @@ import development.mobile.quanlygoimon.code.entity.ChiTietHoaDon;
 
 public class BepTaiBanDangChoAdapter extends ArrayAdapter<ChiTietHoaDon> {
 
-    Activity context = null;
+    Activity activity = null;
     ArrayList<ChiTietHoaDon> myArray = null;
     int layoutId;
 
-    public BepTaiBanDangChoAdapter(@NonNull Activity context, int resource, @NonNull ArrayList<ChiTietHoaDon> objects) {
-        super(context, resource, objects);
-        this.context = context;
+    public BepTaiBanDangChoAdapter(Activity activity, int resource, @NonNull ArrayList<ChiTietHoaDon> objects) {
+        super(activity, resource, objects);
+        this.activity = activity;
         this.myArray = objects;
         this.layoutId = resource;
     }
@@ -31,7 +32,7 @@ public class BepTaiBanDangChoAdapter extends ArrayAdapter<ChiTietHoaDon> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = context.getLayoutInflater();
+        LayoutInflater inflater = activity.getLayoutInflater();
         convertView = inflater.inflate(layoutId, null);
 
         if (myArray.size() > 0 && position >= 0) {
