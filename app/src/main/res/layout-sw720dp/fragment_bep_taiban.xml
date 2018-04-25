@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <fragment
+        android:id="@+id/lst_fm_bep_taiban_dangcho"
+        class="development.mobile.quanlygoimon.code.bep.TaiBanDangChoFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_bep_taiban_dangcho"></fragment>
+
+    <fragment
+        android:id="@+id/lst_fm_bep_taiban_dangchebien"
+        class="development.mobile.quanlygoimon.code.bep.TaiBanDangCheBienFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_bep_taiban_dangchebien"></fragment>
+
+</LinearLayout>
