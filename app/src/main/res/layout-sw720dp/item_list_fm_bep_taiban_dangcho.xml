@@ -47,15 +47,15 @@
         android:layout_weight="2"
         android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/btn_chebien_item_taiban_dangcho"
+        <ImageButton
+            android:id="@+id/ibtn_chebien_item_taiban_dangcho"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             app:srcCompat="@drawable/icon_minus" />
 
         <ImageButton
-            android:id="@+id/btn_tamngungphucvu_item_taiban_dangcho"
+            android:id="@+id/ibtn_tamngungphucvu_item_taiban_dangcho"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

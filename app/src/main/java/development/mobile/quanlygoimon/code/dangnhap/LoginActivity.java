@@ -117,13 +117,13 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-//        writePreferences();
+        writePreferences();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        readPreferences();
+        readPreferences();
     }
 
     public void writePreferences(){
