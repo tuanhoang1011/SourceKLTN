@@ -2,7 +2,11 @@ package development.mobile.quanlygoimon.code.goimon;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,81 +49,116 @@ public class ListViewMonDangGoiAdapter extends ArrayAdapter<MonAn> {
             final ImageButton plusBtn_item = (ImageButton) convertView.findViewById(R.id.plusBtn_item);
             final ImageButton noteBtn_item = (ImageButton) convertView.findViewById(R.id.noteBtn_item);
             final TextView ghiChuTxtView_item = (TextView) convertView.findViewById(R.id.ghiChuTxtView_item);
-            final EditText soLuongEditTxt_item = (EditText) convertView.findViewById(R.id.soLuongEditTxt_item);
+            final TextView soLuongTxtView_item = (TextView) convertView.findViewById(R.id.soLuongTxtView_item);
             final String tempSoLuong;
             final MonAn monAn = monAnLst_DSMonDGFrag.get(position);
 
             tenMonTxtView_item.setText(monAn.getTenMonAn());
             giaTxtView_item.setText(NumberFormat.getCurrencyInstance().format(monAn.getGia()));
             ghiChuTxtView_item.setText(monAn.getGhiChu());
-            soLuongEditTxt_item.setText(monAn.getSoLuong()+"");
+            soLuongTxtView_item.setText(monAn.getSoLuong() + "");
 
-            soLuongEditTxt_item.addTextChangedListener(new TextWatcher() {
+            soLuongTxtView_item.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                }
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle("Nhập số lượng");
 
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    String newVal = soLuongEditTxt_item.getText().toString();
-                    double tongTienCu = monAn.getGia();
-                    int soLuongCu;
-                    if(newVal.trim().equals("")){
-                        soLuongEditTxt_item.setText("1");
-                        soLuongCu = monAn.getSoLuong();
-                        monAn.setSoLuong(1);
-                        monAn.setGia(monAn.getGia() / soLuongCu);
-                    }
-                    else if(newVal.equals("0")){
-                        monAnLst_DSMonDGFrag.remove(position);
-                    }
-                    else{
-                        soLuongCu = monAn.getSoLuong();
-                        monAn.setSoLuong(Integer.parseInt(newVal));
-                        monAn.setGia((monAn.getGia() / soLuongCu) * monAn.getSoLuong());
-                    }
-                    send.sendTongTien(monAn.getGia() - tongTienCu);
-                    notifyDataSetChanged();
-                }
+                    final EditText input = new EditText(context);
+                    input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                    input.setText(soLuongTxtView_item.getText());
+                    input.requestFocus();
+                    builder.setView(input);
 
-                @Override
-                public void afterTextChanged(Editable s) {
+                    builder.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String newVal = input.getText().toString();
+                            double tongTienCu = monAn.getGia();
+                            if (newVal.trim().equals("")) {
+                                dialog.cancel();
+                            } else if (newVal.equals("0")) {
+                                monAnLst_DSMonDGFrag.remove(position);
+                                send.sendTongTien(0 - tongTienCu);
+                            } else {
+                                int soLuongCu = monAn.getSoLuong();
+                                monAn.setSoLuong(Integer.parseInt(newVal));
+                                monAn.setGia((tongTienCu / soLuongCu) * monAn.getSoLuong());
+                            }
+                            send.sendTongTien(monAn.getGia() - tongTienCu);
+                            notifyDataSetChanged();
+
+                        }
+                    });
+                    builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+
+                    builder.show();
                 }
             });
 
             noteBtn_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final Dialog dialog = new Dialog(context);
-                    dialog.setContentView(R.layout.dialog_changeinfomonan);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setTitle("Ghi chú món " + monAn.getTenMonAn());
 
-                    final TextView ghiChuTitle_dialogChange = (TextView) dialog.findViewById(R.id.ghiChuTitle_dialogChange);
-                    final EditText ghiChuEditTxt_dialogChange = (EditText) dialog.findViewById(R.id.ghiChuEditTxt_dialogChange);
-                    Button huyBtn_dialogChange = (Button) dialog.findViewById(R.id.huyBtn_dialogChange);
-                    Button okBtn_dialogChange = (Button) dialog.findViewById(R.id.okBtn_dialogChange);
+                    final EditText input = new EditText(context);
+                    input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+                    input.setFilters(new InputFilter[] {new InputFilter.LengthFilter(100)});
+                    input.setText(ghiChuTxtView_item.getText());
+                    input.requestFocus();
+                    builder.setView(input);
 
-                    ghiChuTitle_dialogChange.setText("Ghi chú " + monAn.getTenMonAn());
-                    ghiChuEditTxt_dialogChange.setText(monAn.getGhiChu());
-                    ghiChuEditTxt_dialogChange.requestFocus();
-
-                    huyBtn_dialogChange.setOnClickListener(new View.OnClickListener() {
+                    builder.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                        }
-                    });
-
-                    okBtn_dialogChange.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            monAnLst_DSMonDGFrag.get(position).setGhiChu(ghiChuEditTxt_dialogChange.getText().toString());
+                        public void onClick(DialogInterface dialog, int which) {
+                            monAn.setGhiChu(input.getText().toString());
                             notifyDataSetChanged();
-                            dialog.dismiss();
+                        }
+                    });
+                    builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
                         }
                     });
 
-                    dialog.show();
-                    dialog.getWindow().setLayout(900, 450);
+                    builder.show();
+                }
+            });
+
+            minusBtn_item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int soLuongCu = monAn.getSoLuong();
+                    double tongTienCu = monAn.getGia();
+                    monAn.setSoLuong(monAn.getSoLuong() - 1);
+                    int newVal = monAn.getSoLuong();
+                    if (newVal == 0) {
+                        monAnLst_DSMonDGFrag.remove(position);
+                        send.sendTongTien(0 - tongTienCu);
+                    } else {
+                        monAn.setGia((tongTienCu / soLuongCu) * monAn.getSoLuong());
+                    }
+                    send.sendTongTien(monAn.getGia() - tongTienCu);
+                    notifyDataSetChanged();
+                }
+            });
+
+            plusBtn_item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int soLuongCu = monAn.getSoLuong();
+                    double tongTienCu = monAn.getGia();
+                    monAn.setSoLuong(monAn.getSoLuong() + 1);
+                    monAn.setGia((tongTienCu / soLuongCu) * monAn.getSoLuong());
+                    send.sendTongTien(monAn.getGia() - tongTienCu);
+                    notifyDataSetChanged();
                 }
             });
         }

@@ -16,9 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".phucvuchonban.PhucVuActivity" />
-        <activity android:name=".goimon.GoiMonActivity"></activity>
-        <activity android:name=".bep.BepActivity"></activity>
+        <activity android:name=".phucvuchonban.PhucVuActivity"/>
+        <activity android:name=".goimon.GoiMonActivity"/>
     </application>
 
 </manifest>

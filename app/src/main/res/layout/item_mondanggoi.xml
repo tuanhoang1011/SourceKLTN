@@ -43,15 +43,14 @@
             android:layout_weight="1"
             app:srcCompat="@drawable/icon_minus" />
 
-        <EditText
-            android:id="@+id/soLuongEditTxt_item"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/soLuongTxtView_item"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="2"
-            android:ems="10"
             android:gravity="center"
-            android:inputType="textPersonName|number"
+            android:maxLength="4"
             android:text="1"
             android:textSize="16sp" />
 

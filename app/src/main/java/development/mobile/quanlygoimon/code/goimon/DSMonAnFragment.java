@@ -41,15 +41,14 @@ public class DSMonAnFragment extends Fragment {
         send = (SendMonAn) getActivity();
         monAnGridView = (GridView) view.findViewById(R.id.monAnGridView);
         monAnLst_DSMonAnFrag = new ArrayList<>();
-        adapter_DSMonAnFrag = new GridViewMonAnAdapter(getActivity(), R.layout.item_monan, monAnLst_DSMonAnFrag);
+        adapter_DSMonAnFrag = new GridViewMonAnAdapter((GoiMonActivity)getActivity(), R.layout.item_monan, monAnLst_DSMonAnFrag);
         monAnGridView.setAdapter(adapter_DSMonAnFrag);
         getAllMonAn("Món ăn");
 
         monAnGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println(monAnLst_DSMonAnFrag);
-                send.sendMonAn(monAnLst_DSMonAnFrag.get(0));
+                send.sendMonAn(monAnLst_DSMonAnFrag.get(position));
             }
         });
 

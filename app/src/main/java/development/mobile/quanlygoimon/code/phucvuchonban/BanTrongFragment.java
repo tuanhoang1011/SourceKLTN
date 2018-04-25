@@ -38,6 +38,7 @@ public class BanTrongFragment extends Fragment {
     private ArrayList<String> khuVucLst = null;
     private ArrayAdapter<String> adapterSpinner = null;
     private ArrayList<String> banSelected = new ArrayList<String>();
+    private ArrayList<String> pushKeyBanSelected = new ArrayList<String>();
     private HashMap<Integer, List<Integer>> temptSelectedMap = new HashMap<>();
     private int tempPosition = 0;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -78,7 +79,7 @@ public class BanTrongFragment extends Fragment {
                 } else {
                     gvBanAdapter.selectedPositions = new ArrayList<Integer>();
                 }
-                getListBanTrong(khuVucLst.get(position));
+                getListBan(khuVucLst.get(position));
             }
 
             @Override
@@ -95,11 +96,13 @@ public class BanTrongFragment extends Fragment {
                     if (selectedIndex > -1) {
                         gvBanAdapter.selectedPositions.remove(selectedIndex);
                         Ban ban = banLst.get(position);
-                        banSelected.remove(ban.getMaBan().toString());
+                        banSelected.remove(ban.getMaBan());
+                        pushKeyBanSelected.remove(ban.getPushKey());
                     } else {
                         gvBanAdapter.selectedPositions.add(position);
                         Ban ban = banLst.get(position);
-                        banSelected.add(ban.getMaBan().toString());
+                        banSelected.add(ban.getMaBan());
+                        pushKeyBanSelected.add(ban.getPushKey());
                     }
                     if (banSelected.size() > 0) {
                         goiMonBtn.setEnabled(true);
@@ -116,6 +119,7 @@ public class BanTrongFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), GoiMonActivity.class);
                 intent.putExtra("DSBan", banSelected);
+                intent.putExtra("DSPushKeyBan", pushKeyBanSelected);
                 startActivity(intent);
             }
         });
@@ -142,7 +146,7 @@ public class BanTrongFragment extends Fragment {
         });
     }
 
-    private void getListBanTrong(String tenKhuVuc) {
+    private void getListBan(String tenKhuVuc) {
         myRef.child("KhuVuc").orderByChild("tenKhuVuc").equalTo(tenKhuVuc).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -151,6 +155,7 @@ public class BanTrongFragment extends Fragment {
                         Ban ban = new Ban();
                         ban.setMaBan(childOfChild.child("maBan").getValue(String.class));
                         ban.setTrangThai(childOfChild.child("trangThai").getValue(String.class));
+                        ban.setPushKey(childOfChild.getKey());
                         banLst.add(ban);
                     }
                 }

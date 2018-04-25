@@ -11,7 +11,7 @@
         android:id="@+id/monDangGoiFrag"
         android:name="development.mobile.quanlygoimon.code.goimon.DSMonDangGoiFragment"
         android:layout_width="match_parent"
-        android:layout_height="250dp" />
+        android:layout_height="200dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="Số bàn:"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/soBanTxtView"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/textView5"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="Tổng tiền:"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tongTienTxtView"
@@ -50,7 +50,7 @@
             android:layout_weight="3"
             android:text="0"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="Bàn:"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/dsBanTxtView"
@@ -75,7 +75,24 @@
             android:layout_height="wrap_content"
             android:layout_weight="8"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/xacNhanBtn_goiMonAct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Xác nhận"
+            android:textSize="16sp" />
+
     </LinearLayout>
 
     <LinearLayout
