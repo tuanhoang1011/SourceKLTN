@@ -6,18 +6,21 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:gravity="center"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingLeft="5sp"
+    android:paddingRight="5sp">
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="8"
+        android:layout_weight="7"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tv_idhd_item_taiban_dangcho"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:textSize="@dimen/item_textsize" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,35 +32,45 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="@dimen/item_textsize" />
 
             <TextView
                 android:id="@+id/tv_soluong_item_taiban_dangcho"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="@dimen/item_textsize" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_ghichu_item_taiban_dangcho"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/item_textsize" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_weight="2"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/ibtn_chebien_item_taiban_dangcho"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="76sp"
+            android:layout_height="76sp"
             android:layout_weight="1"
             app:srcCompat="@drawable/icon_minus" />
 
         <ImageButton
             android:id="@+id/ibtn_tamngungphucvu_item_taiban_dangcho"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="76sp"
+            android:layout_height="76sp"
             android:layout_weight="1"
             app:srcCompat="@android:drawable/ic_delete" />
 

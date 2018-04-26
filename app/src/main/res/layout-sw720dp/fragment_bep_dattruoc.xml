@@ -6,33 +6,38 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/tv_field_madatruoc_item_dattruoc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:text="Mã đặt trước" />
+            android:text="Mã đặt trước"
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/tv_field_thoigiannhanban_item_dattruoc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
-            android:text="Thời gian nhận bàn" />
+            android:text="Thời gian nhận bàn"
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/tv_field_soban_item_dattruoc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Số bàn" />
+            android:text="Số bàn"
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/tv_field_songuoi_item_dattruoc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Số người" />
+            android:text="Số người"
+            android:textSize="30sp" />
     </LinearLayout>
 
     <ListView

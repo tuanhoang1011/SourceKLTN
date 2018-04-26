@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -42,18 +43,26 @@ public class BepTaiBanDangChoAdapter extends ArrayAdapter<ChiTietHoaDon> {
         if (myArray.size() > 0 && position >= 0) {
             final ChiTietHoaDon cthd = myArray.get(position);
             final TextView tvIdHDItemTaibanDangCho = (TextView)convertView.findViewById(R.id.tv_idhd_item_taiban_dangcho);
-            tvIdHDItemTaibanDangCho.setText(cthd.getThoiGianGoi().toString());
+            tvIdHDItemTaibanDangCho.setText(cthd.getMaHoaDon().toString());
             final TextView tvTenMonAnItemTaibanDangCho = (TextView)convertView.findViewById(R.id.tv_tenmonan_item_taiban_dangcho);
             tvTenMonAnItemTaibanDangCho.setText(cthd.getTenMonAn().toString());
             final TextView tvSoLuongItemTaibanDangCho = (TextView)convertView.findViewById(R.id.tv_soluong_item_taiban_dangcho);
             tvSoLuongItemTaibanDangCho.setText(cthd.getSoLuong() + "");
+            final TextView tvGhiChuItemTaibanDangCho = (TextView)convertView.findViewById(R.id.tv_ghichu_item_taiban_dangcho);
+            tvGhiChuItemTaibanDangCho.setText(cthd.getGhiChu());
             final ImageButton ibtnCheBienItemTaibanDangCho = (ImageButton) convertView.findViewById(R.id.ibtn_chebien_item_taiban_dangcho);
             final ImageButton ibtnTamNgungPhucVuItemTaibanDangCho = (ImageButton)convertView.findViewById(R.id.ibtn_tamngungphucvu_item_taiban_dangcho);
 
             ibtnCheBienItemTaibanDangCho.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    cthd.setTrangThai("");
+                    Toast.makeText(getContext(), "CheBien", Toast.LENGTH_LONG).show();
+                }
+            });
+            ibtnTamNgungPhucVuItemTaibanDangCho.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getContext(), "TamNgung", Toast.LENGTH_LONG).show();
                 }
             });
         }

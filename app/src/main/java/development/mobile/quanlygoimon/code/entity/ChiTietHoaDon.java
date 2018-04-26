@@ -10,11 +10,13 @@ public class ChiTietHoaDon {
     private String thoiGianGoi;
     private String loai;
     private String trangThai;
+    private String pushkeyHD;
+    private String pushKeyCTHD;
 
     public ChiTietHoaDon() {
     }
 
-    public ChiTietHoaDon(String maHoaDon, int maMonAn, String tenMonAn, int soLuong, String ghiChu, double gia, String thoiGianGoi, String loai, String trangThai) {
+    public ChiTietHoaDon(String maHoaDon, int maMonAn, String tenMonAn, int soLuong, String ghiChu, double gia, String thoiGianGoi, String loai, String trangThai, String pushkeyHD, String pushKeyCTHD) {
         this.maHoaDon = maHoaDon;
         this.maMonAn = maMonAn;
         this.tenMonAn = tenMonAn;
@@ -24,6 +26,8 @@ public class ChiTietHoaDon {
         this.thoiGianGoi = thoiGianGoi;
         this.loai = loai;
         this.trangThai = trangThai;
+        this.pushkeyHD = pushkeyHD;
+        this.pushKeyCTHD = pushKeyCTHD;
     }
 
     public String getMaHoaDon() {
@@ -98,6 +102,22 @@ public class ChiTietHoaDon {
         this.trangThai = trangThai;
     }
 
+    public String getPushkeyHD() {
+        return pushkeyHD;
+    }
+
+    public void setPushkeyHD(String pushkeyHD) {
+        this.pushkeyHD = pushkeyHD;
+    }
+
+    public String getPushKeyCTHD() {
+        return pushKeyCTHD;
+    }
+
+    public void setPushKeyCTHD(String pushKeyCTHD) {
+        this.pushKeyCTHD = pushKeyCTHD;
+    }
+
     @Override
     public String toString() {
         return "ChiTietHoaDon{" +
@@ -110,6 +130,8 @@ public class ChiTietHoaDon {
                 ", thoiGianGoi='" + thoiGianGoi + '\'' +
                 ", loai='" + loai + '\'' +
                 ", trangThai='" + trangThai + '\'' +
+                ", pushkeyHD='" + pushkeyHD + '\'' +
+                ", pushKeyCTHD='" + pushKeyCTHD + '\'' +
                 '}';
     }
 }

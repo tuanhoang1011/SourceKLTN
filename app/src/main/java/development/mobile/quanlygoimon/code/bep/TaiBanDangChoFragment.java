@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,9 +32,9 @@ public class TaiBanDangChoFragment extends Fragment{
 
     private TextView tvIdHD, tvTenMonAn, tvSoLuong;
     private ImageButton btnCheBien, btnTamNgungPhucVu;
-    List<ChiTietHoaDon> chiTietHoaDonArrayList = null;
-    BepTaiBanDangChoAdapter bepTaiBanDangChoAdapter = null;
-    ListView lvCTHD;
+    private List<ChiTietHoaDon> chiTietHoaDonArrayList = null;
+    private BepTaiBanDangChoAdapter bepTaiBanDangChoAdapter = null;
+    private ListView lvCTHD;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
 
@@ -44,14 +45,7 @@ public class TaiBanDangChoFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bep_taiban_dangcho, container, false);
-
-        tvIdHD = (TextView) view.findViewById(R.id.tv_idhd_item_taiban_dangcho);
-        tvTenMonAn = (TextView) view.findViewById(R.id.tv_tenmonan_item_taiban_dangcho);
-        tvSoLuong = (TextView) view.findViewById(R.id.tv_soluong_item_taiban_dangcho);
-        btnCheBien = (ImageButton) view.findViewById(R.id.ibtn_chebien_item_taiban_dangcho);
-        btnTamNgungPhucVu = (ImageButton) view.findViewById(R.id.ibtn_tamngungphucvu_item_taiban_dangcho);
         lvCTHD  = (ListView) view.findViewById(R.id.lv_cthd_taiban_dangcho);
-
         chiTietHoaDonArrayList = new ArrayList<ChiTietHoaDon>();
         bepTaiBanDangChoAdapter = new BepTaiBanDangChoAdapter(getActivity(), R.layout.item_list_fm_bep_taiban_dangcho, chiTietHoaDonArrayList);
         lvCTHD.setAdapter(bepTaiBanDangChoAdapter);
@@ -60,29 +54,41 @@ public class TaiBanDangChoFragment extends Fragment{
         return view;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
     private void getAllHD(){
-        myRef.child("chiTietHoaDon").addValueEventListener(new ValueEventListener() {
+        myRef.child("HoaDon").orderByChild("daThanhToan").equalTo(false).addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                chiTietHoaDonArrayList.clear();
-                for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    for(DataSnapshot childOfChild : child.child("chiTietHoaDon").getChildren()){
-                        ChiTietHoaDon cthd = childOfChild.getValue(ChiTietHoaDon.class);
-                        cthd.setMaHoaDon(child.child("maHoaDon").getValue(String.class));
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                for(DataSnapshot child : dataSnapshot.child("chiTietHoaDon").getChildren()){
+                    if (child.child("trangThai").getValue(String.class).equals("Đang chờ") &&
+                            child.child("loai").getValue(String.class).equals("Bếp")) {
+                        ChiTietHoaDon cthd = child.getValue(ChiTietHoaDon.class);
+                        cthd.setMaHoaDon(dataSnapshot.child("maHoaDon").getValue(String.class));
+                        cthd.setPushkeyHD(dataSnapshot.getKey());
+                        cthd.setPushKeyCTHD(child.getKey());
                         chiTietHoaDonArrayList.add(cthd);
-                        bepTaiBanDangChoAdapter.notifyDataSetChanged();
                     }
                 }
+                bepTaiBanDangChoAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getActivity(), "Lỗi: " + databaseError, Toast.LENGTH_SHORT).show();
+
             }
         });
     }

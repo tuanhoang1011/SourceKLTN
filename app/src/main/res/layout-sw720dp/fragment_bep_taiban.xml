@@ -7,18 +7,18 @@
 
     <fragment
         android:id="@+id/lst_fm_bep_taiban_dangcho"
-        class="development.mobile.quanlygoimon.code.bep.TaiBanDangChoFragment"
+        android:name="development.mobile.quanlygoimon.code.bep.TaiBanDangChoFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        tools:layout="@layout/fragment_bep_taiban_dangcho"></fragment>
+        tools:layout="@layout/fragment_bep_taiban_dangcho" />
 
     <fragment
         android:id="@+id/lst_fm_bep_taiban_dangchebien"
-        class="development.mobile.quanlygoimon.code.bep.TaiBanDangCheBienFragment"
+        android:name="development.mobile.quanlygoimon.code.bep.TaiBanDangCheBienFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        tools:layout="@layout/fragment_bep_taiban_dangchebien"></fragment>
+        tools:layout="@layout/fragment_bep_taiban_dangchebien" />
 
 </LinearLayout>
