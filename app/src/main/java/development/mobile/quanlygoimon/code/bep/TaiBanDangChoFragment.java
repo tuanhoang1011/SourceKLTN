@@ -20,17 +20,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import development.mobile.quanlygoimon.code.R;
 import development.mobile.quanlygoimon.code.entity.ChiTietHoaDon;
 import development.mobile.quanlygoimon.code.entity.MonAn;
+import development.mobile.quanlygoimon.code.goimon.ListViewNhomHangAdapter;
 
 public class TaiBanDangChoFragment extends Fragment{
 
     private TextView tvIdHD, tvTenMonAn, tvSoLuong;
     private ImageButton btnCheBien, btnTamNgungPhucVu;
-    private ArrayList<ChiTietHoaDon> chiTietHoaDonArrayList = null;
-    private BepTaiBanDangChoAdapter bepTaiBanDangChoAdapter = null;
+    List<ChiTietHoaDon> chiTietHoaDonArrayList = null;
+    BepTaiBanDangChoAdapter bepTaiBanDangChoAdapter = null;
     ListView lvCTHD;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
@@ -50,10 +52,10 @@ public class TaiBanDangChoFragment extends Fragment{
         btnTamNgungPhucVu = (ImageButton) view.findViewById(R.id.ibtn_tamngungphucvu_item_taiban_dangcho);
         lvCTHD  = (ListView) view.findViewById(R.id.lv_cthd_taiban_dangcho);
 
-        lvCTHD.setAdapter(bepTaiBanDangChoAdapter);
         chiTietHoaDonArrayList = new ArrayList<ChiTietHoaDon>();
-        getAllCTHD();
         bepTaiBanDangChoAdapter = new BepTaiBanDangChoAdapter(getActivity(), R.layout.item_list_fm_bep_taiban_dangcho, chiTietHoaDonArrayList);
+        lvCTHD.setAdapter(bepTaiBanDangChoAdapter);
+        getAllHD();
 
         return view;
     }
@@ -63,21 +65,20 @@ public class TaiBanDangChoFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void getAllCTHD(){
-        myRef.child("HoaDon").addListenerForSingleValueEvent(new ValueEventListener() {
+    private void getAllHD(){
+        myRef.child("chiTietHoaDon").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 chiTietHoaDonArrayList.clear();
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    Log.d("====HoaDon", child.toString());
                     for(DataSnapshot childOfChild : child.child("chiTietHoaDon").getChildren()){
-                        Log.d("=====chiTietHoaDon", "onDataChange: " + child.toString());
                         ChiTietHoaDon cthd = childOfChild.getValue(ChiTietHoaDon.class);
-                        cthd.setMaHoaDon(child.child("maHoaDon").getValue().toString());
+                        cthd.setMaHoaDon(child.child("maHoaDon").getValue(String.class));
                         chiTietHoaDonArrayList.add(cthd);
+                        bepTaiBanDangChoAdapter.notifyDataSetChanged();
+                        break;
                     }
                 }
-                bepTaiBanDangChoAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -85,5 +86,6 @@ public class TaiBanDangChoFragment extends Fragment{
                 Toast.makeText(getActivity(), "Lỗi: " + databaseError, Toast.LENGTH_SHORT).show();
             }
         });
+        Log.d("\n\n", "Done getAllHD");
     }
 }

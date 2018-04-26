@@ -139,7 +139,7 @@ public class LoginActivity extends AppCompatActivity {
         boolean isLoggedIin = sharePre.getBoolean("isLoggedIin", false);
 
         if(isLoggedIin){
-            Intent intent = new Intent(LoginActivity.this, PhucVuActivity.class);
+            Intent intent = new Intent(LoginActivity.this, BepActivity.class);
             startActivity(intent);
             finish();
         }
