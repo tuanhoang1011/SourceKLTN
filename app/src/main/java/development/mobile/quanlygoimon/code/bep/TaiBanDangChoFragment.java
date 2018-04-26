@@ -76,7 +76,6 @@ public class TaiBanDangChoFragment extends Fragment{
                         cthd.setMaHoaDon(child.child("maHoaDon").getValue(String.class));
                         chiTietHoaDonArrayList.add(cthd);
                         bepTaiBanDangChoAdapter.notifyDataSetChanged();
-                        break;
                     }
                 }
             }
@@ -86,6 +85,5 @@ public class TaiBanDangChoFragment extends Fragment{
                 Toast.makeText(getActivity(), "Lỗi: " + databaseError, Toast.LENGTH_SHORT).show();
             }
         });
-        Log.d("\n\n", "Done getAllHD");
     }
 }
