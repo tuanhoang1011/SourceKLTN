@@ -17,12 +17,12 @@ import java.util.List;
 import development.mobile.quanlygoimon.code.R;
 import development.mobile.quanlygoimon.code.entity.PhieuDatTruoc;
 
-public class DatTruocAdapter extends ArrayAdapter<PhieuDatTruoc> {
+public class DatTruocDanhSachAdapter extends ArrayAdapter<PhieuDatTruoc> {
     private Activity activity = null;
     private List<PhieuDatTruoc> myArray = null;
     private int layoutId;
 
-    public DatTruocAdapter(Activity activity, int resource, @NonNull List<PhieuDatTruoc> objects) {
+    public DatTruocDanhSachAdapter(Activity activity, int resource, @NonNull List<PhieuDatTruoc> objects) {
         super(activity, resource, objects);
         this.activity = activity;
         this.myArray = objects;
