@@ -37,7 +37,6 @@ public class TaiBanDangCheBienFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_bep_taiban_dangchebien, container, false);
         lvCTHD  = (ListView) view.findViewById(R.id.lv_cthd_taiban_dangchebien);
         chiTietHoaDonArrayList = new ArrayList<ChiTietHoaDon>();

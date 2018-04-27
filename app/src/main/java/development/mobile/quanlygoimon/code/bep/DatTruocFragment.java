@@ -1,12 +1,15 @@
 package development.mobile.quanlygoimon.code.bep;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -19,7 +22,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import development.mobile.quanlygoimon.code.R;
@@ -31,10 +37,9 @@ public class DatTruocFragment extends Fragment {
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
-
-    List<PhieuDatTruoc> phieuDatTruocArrayList = null;
-    ArrayAdapter<PhieuDatTruoc> phieuDatTruocArrayAdapter = null;
-    ListView lvPhieuDatTruoc;
+    private List<PhieuDatTruoc> phieuDatTruocArrayList = null;
+    private ArrayAdapter<PhieuDatTruoc> phieuDatTruocArrayAdapter = null;
+    private ListView lvPhieuDatTruoc;
 
     public DatTruocFragment() {
     }
@@ -51,11 +56,24 @@ public class DatTruocFragment extends Fragment {
         lvPhieuDatTruoc.setAdapter(phieuDatTruocArrayAdapter);
         getAllPhieuDatTruoc();
 
+        lvPhieuDatTruoc.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+                Intent intent = new Intent(getContext(), DatTruocFragmentChiTiet.class);
+                PhieuDatTruoc phieuDatTruoc = phieuDatTruocArrayList.get(position);
+//                Bundle bundle = new Bundle();
+//                bundle.putParcelable("phieu", (Parcelable) phieuDatTruoc);
+//                intent.putExtra("pdt", (Serializable) phieuDatTruoc);
+//                startActivity(intent);
+            }
+        });
+
         return view;
     }
 
     private void getAllPhieuDatTruoc(){
-        myRef.child("PhieuDatTruoc").addValueEventListener(new ValueEventListener() {
+        myRef.child("PhieuDatTruoc").orderByChild("thoiGianNhanBan").startAt(new SimpleDateFormat("dd/MM/yyyy").format(new Date())).endAt(new SimpleDateFormat("dd/MM/yyyy 23:59").format(new Date())).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 phieuDatTruocArrayList.clear();
@@ -73,5 +91,4 @@ public class DatTruocFragment extends Fragment {
             }
         });
     }
-
 }

@@ -30,7 +30,6 @@ import development.mobile.quanlygoimon.code.goimon.ListViewNhomHangAdapter;
 
 public class TaiBanDangChoFragment extends Fragment{
 
-    private TextView tvIdHD, tvTenMonAn, tvSoLuong;
     private ImageButton btnCheBien, btnTamNgungPhucVu;
     private List<ChiTietHoaDon> chiTietHoaDonArrayList = null;
     private BepTaiBanDangChoAdapter bepTaiBanDangChoAdapter = null;
@@ -50,6 +49,14 @@ public class TaiBanDangChoFragment extends Fragment{
         bepTaiBanDangChoAdapter = new BepTaiBanDangChoAdapter(getActivity(), R.layout.item_list_fm_bep_taiban_dangcho, chiTietHoaDonArrayList);
         lvCTHD.setAdapter(bepTaiBanDangChoAdapter);
         getAllHD();
+//        btnCheBien = (ImageButton)view.findViewById(R.id.ibtn_chebien_item_taiban_dangcho);
+//
+//        btnCheBien.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(getContext(), "chebien_: ", Toast.LENGTH_LONG).show();
+//            }
+//        });
 
         return view;
     }

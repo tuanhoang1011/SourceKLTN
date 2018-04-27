@@ -9,15 +9,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import development.mobile.quanlygoimon.code.R;
 import development.mobile.quanlygoimon.code.entity.PhieuDatTruoc;
 
 public class DatTruocAdapter extends ArrayAdapter<PhieuDatTruoc> {
-    Activity activity = null;
-    List<PhieuDatTruoc> myArray = null;
-    int layoutId;
+    private Activity activity = null;
+    private List<PhieuDatTruoc> myArray = null;
+    private int layoutId;
 
     public DatTruocAdapter(Activity activity, int resource, @NonNull List<PhieuDatTruoc> objects) {
         super(activity, resource, objects);
@@ -37,12 +40,18 @@ public class DatTruocAdapter extends ArrayAdapter<PhieuDatTruoc> {
             final TextView tvMaDatTruoc= (TextView) convertView.findViewById(R.id.tv_madatruoc_item_dattruoc);
             tvMaDatTruoc.setText(phieuDatTruoc.getMaDatTruoc().toString());
             final TextView tvThoiGianNhanBan= (TextView) convertView.findViewById(R.id.tv_thoigiannhanban_item_dattruoc);
-            tvThoiGianNhanBan.setText(phieuDatTruoc.getThoiGianNhanBan().toString());
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            try {
+                tvThoiGianNhanBan.setText(new SimpleDateFormat("HH:mm").format(formatter.parse(phieuDatTruoc.getThoiGianNhanBan())));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             final TextView tvSoBan= (TextView) convertView.findViewById(R.id.tv_soban_item_dattruoc);
             tvSoBan.setText(phieuDatTruoc.getSoLuongBan() + "");
             final TextView tvSoNguoi = (TextView) convertView.findViewById(R.id.tv_songuoi_item_dattruoc);
             tvSoNguoi.setText(phieuDatTruoc.getSoLuongKhach() + "");
         }
+
         return convertView;
     }
 }

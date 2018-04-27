@@ -21,9 +21,9 @@ import development.mobile.quanlygoimon.code.entity.ChiTietHoaDon;
 
 public class BepTaiBanDangChoAdapter extends ArrayAdapter<ChiTietHoaDon> {
 
-    Activity activity = null;
-    List<ChiTietHoaDon> myArray = null;
-    int layoutId;
+    private Activity activity = null;
+    private List<ChiTietHoaDon> myArray = null;
+    private int layoutId;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
 
@@ -66,6 +66,7 @@ public class BepTaiBanDangChoAdapter extends ArrayAdapter<ChiTietHoaDon> {
                 }
             });
         }
+
         return convertView;
     }
 }

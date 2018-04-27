@@ -55,10 +55,11 @@ public class BepTaiBanDangCheBienAdapter extends ArrayAdapter<ChiTietHoaDon> {
             ibtnHoanThanhMonAn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getContext(), "HoanThanhMonAn", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "HoanThanhMonAn: " + cthd.getPushKeyCTHD(), Toast.LENGTH_LONG).show();
                 }
             });
         }
+
         return convertView;
     }
 }
