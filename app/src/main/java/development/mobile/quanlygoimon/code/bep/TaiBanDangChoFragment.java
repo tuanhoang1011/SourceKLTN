@@ -55,41 +55,72 @@ public class TaiBanDangChoFragment extends Fragment{
     }
 
     private void getAllHD(){
-        myRef.child("HoaDon").orderByChild("daThanhToan").equalTo(false).addChildEventListener(new ChildEventListener() {
+        myRef.child("HoaDon").orderByChild("daThanhToan").equalTo(false).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                for(DataSnapshot child : dataSnapshot.child("chiTietHoaDon").getChildren()){
-                    if (child.child("trangThai").getValue(String.class).equals("Đang chờ") &&
-                            child.child("loai").getValue(String.class).equals("Bếp")) {
-                        ChiTietHoaDon cthd = child.getValue(ChiTietHoaDon.class);
-                        cthd.setMaHoaDon(dataSnapshot.child("maHoaDon").getValue(String.class));
-                        cthd.setPushkeyHD(dataSnapshot.getKey());
-                        cthd.setPushKeyCTHD(child.getKey());
-                        chiTietHoaDonArrayList.add(cthd);
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                chiTietHoaDonArrayList.clear();
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    for(DataSnapshot childOfChild : child.child("chiTietHoaDon").getChildren()){
+                        if (childOfChild.child("loai").getValue(String.class).equals("Bếp")
+                                && childOfChild.child("trangThai").getValue(String.class).equals("Đang chờ")) {
+                            ChiTietHoaDon cthd = childOfChild.getValue(ChiTietHoaDon.class);
+                            cthd.setMaHoaDon(child.child("maHoaDon").getValue(String.class));
+                            chiTietHoaDonArrayList.add(cthd);
+                        }
                     }
                 }
                 bepTaiBanDangChoAdapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                Toast.makeText(getActivity(), "Lỗi: " + databaseError, Toast.LENGTH_SHORT).show();
             }
         });
+//        myRef.child("HoaDon").orderByChild("daThanhToan").equalTo(false).addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//                for(DataSnapshot child : dataSnapshot.child("chiTietHoaDon").getChildren()){
+//                    if (child.child("trangThai").getValue(String.class).equals("Đang chờ") &&
+//                            child.child("loai").getValue(String.class).equals("Bếp")) {
+//                        ChiTietHoaDon cthd = child.getValue(ChiTietHoaDon.class);
+//                        cthd.setMaHoaDon(dataSnapshot.child("maHoaDon").getValue(String.class));
+//                        cthd.setPushkeyHD(dataSnapshot.getKey());
+//                        cthd.setPushKeyCTHD(child.getKey());
+//                        chiTietHoaDonArrayList.add(cthd);
+//                    }
+//                }
+//                bepTaiBanDangChoAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//                for(DataSnapshot child : dataSnapshot.child("chiTietHoaDon").getChildren()){
+//                    if (child.child("trangThai").getValue(String.class).equals("Đang chờ") &&
+//                            child.child("loai").getValue(String.class).equals("Bếp")) {
+//                        String key= child.getKey();
+//                        ChiTietHoaDon cthd = child.getValue(ChiTietHoaDon.class);
+//                        cthd.setMaHoaDon(dataSnapshot.child("maHoaDon").getValue(String.class));
+//                        chiTietHoaDonArrayList.set(chiTietHoaDonArrayList.indexOf(key), cthd);
+//                    }
+//                }
+//                bepTaiBanDangChoAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onChildRemoved(DataSnapshot dataSnapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
     }
 }

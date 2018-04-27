@@ -19,7 +19,7 @@
             android:id="@+id/tv_idhd_item_taiban_dangchebien"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="@dimen/item_textsize" />
+            android:textSize="@dimen/item_textsize_idhd_bep" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,7 +32,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="8"
                 android:text="TextView"
-                android:textSize="@dimen/item_textsize" />
+                android:textSize="@dimen/item_textsize_tenmon_bep"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/tv_soluong_item_taiban_dangchebien"
@@ -40,14 +41,16 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="TextView"
-                android:textSize="@dimen/item_textsize" />
+                android:textSize="@dimen/item_textsize_tenmon_bep"
+                android:textStyle="bold"/>
         </LinearLayout>
 
         <TextView
             android:id="@+id/tv_ghichu_item_taiban_dangchebien"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="@dimen/item_textsize" />
+            android:textSize="@dimen/item_textsize_ghichu_bep"
+            android:paddingLeft="@dimen/item_padding_ghichu_bep"/>
 
     </LinearLayout>
 
@@ -63,7 +66,7 @@
             android:id="@+id/ibtn_hoanthanhmonan_item_taiban_dangchebien"
             android:layout_width="76sp"
             android:layout_height="76sp"
-            app:srcCompat="@drawable/icon_minus" />
+            app:srcCompat="@drawable/icon_hoanthanhmonan" />
     </LinearLayout>
 
 </LinearLayout>
