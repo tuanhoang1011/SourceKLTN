@@ -1,5 +1,8 @@
 package development.mobile.quanlygoimon.code.entity;
 
+import java.util.ArrayList;
+import java.util.Objects;
+
 public class PhieuDatTruoc {
     private String maDatTruoc;
     private int maNhanVien;
@@ -11,11 +14,13 @@ public class PhieuDatTruoc {
     private String ngayLap;
     private String thoiGianNhanBan;
     private double tienCoc;
+    private ArrayList<ChiTietPhieuDatTruoc> chiTietPhieuDatTruocArrayList;
+    private String pushkeyPDT;
 
     public PhieuDatTruoc() {
     }
 
-    public PhieuDatTruoc(String maDatTruoc, int maNhanVien, String tenNhanVien, int soLuongBan, int soLuongKhach, String tenKhachHang, String soDienThoai, String ngayLap, String thoiGianNhanBan, double tienCoc) {
+    public PhieuDatTruoc(String maDatTruoc, int maNhanVien, String tenNhanVien, int soLuongBan, int soLuongKhach, String tenKhachHang, String soDienThoai, String ngayLap, String thoiGianNhanBan, double tienCoc, String pushkeyPDT) {
         this.maDatTruoc = maDatTruoc;
         this.maNhanVien = maNhanVien;
         this.tenNhanVien = tenNhanVien;
@@ -26,6 +31,7 @@ public class PhieuDatTruoc {
         this.ngayLap = ngayLap;
         this.thoiGianNhanBan = thoiGianNhanBan;
         this.tienCoc = tienCoc;
+        this.pushkeyPDT = pushkeyPDT;
     }
 
     public String getMaDatTruoc() {
@@ -108,6 +114,22 @@ public class PhieuDatTruoc {
         this.tienCoc = tienCoc;
     }
 
+    public ArrayList<ChiTietPhieuDatTruoc> getChiTietPhieuDatTruocArrayList() {
+        return chiTietPhieuDatTruocArrayList;
+    }
+
+    public void setChiTietPhieuDatTruocArrayList(ArrayList<ChiTietPhieuDatTruoc> chiTietPhieuDatTruocArrayList) {
+        this.chiTietPhieuDatTruocArrayList = chiTietPhieuDatTruocArrayList;
+    }
+
+    public String getPushkeyPDT() {
+        return pushkeyPDT;
+    }
+
+    public void setPushkeyPDT(String pushkeyPDT) {
+        this.pushkeyPDT = pushkeyPDT;
+    }
+
     @Override
     public String toString() {
         return "PhieuDatTruoc{" +
@@ -122,5 +144,19 @@ public class PhieuDatTruoc {
                 ", thoiGianNhanBan='" + thoiGianNhanBan + '\'' +
                 ", tienCoc=" + tienCoc +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PhieuDatTruoc that = (PhieuDatTruoc) o;
+        return Objects.equals(maDatTruoc, that.maDatTruoc);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(maDatTruoc);
     }
 }

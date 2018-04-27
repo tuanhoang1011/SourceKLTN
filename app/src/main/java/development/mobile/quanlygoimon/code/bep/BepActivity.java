@@ -26,10 +26,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import development.mobile.quanlygoimon.code.R;
 import development.mobile.quanlygoimon.code.dangnhap.LoginActivity;
+import development.mobile.quanlygoimon.code.entity.PhieuDatTruoc;
 import development.mobile.quanlygoimon.code.phucvuchonban.PagerAdapter;
 import development.mobile.quanlygoimon.code.phucvuchonban.PhucVuActivity;
 
-public class BepActivity extends AppCompatActivity {
+public class BepActivity extends AppCompatActivity  implements DatTruocDanhSachFragment.SendPhieuDatTruoc {
 
     private ViewPager pagerBep;
     private PagerAdapterBep adapterBep;
@@ -124,5 +125,11 @@ public class BepActivity extends AppCompatActivity {
         tenNV = sharePre.getString("tenNhanVien", "");
         pushKeyNV = sharePre.getString("pushKeyNhanVien", "");
         titleToolbarTxtView.setText(maNV + "-" + tenNV);
+    }
+
+    @Override
+    public void sendPhieuDatTruoc(PhieuDatTruoc phieuDatTruoc) {
+        DatTruocChiTietFragment datTruocChiTietFragment = (DatTruocChiTietFragment) getSupportFragmentManager().findFragmentById(R.id.phieuDatTruocLayoutFrag);
+        datTruocChiTietFragment.getPhieuDatTruocFromDatTruocDSFrag(phieuDatTruoc);
     }
 }

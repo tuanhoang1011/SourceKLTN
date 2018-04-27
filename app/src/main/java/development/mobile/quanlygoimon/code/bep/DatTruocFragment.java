@@ -35,13 +35,12 @@ import development.mobile.quanlygoimon.code.entity.ChiTietHoaDon;
 import development.mobile.quanlygoimon.code.entity.MonAn;
 import development.mobile.quanlygoimon.code.entity.PhieuDatTruoc;
 
-public class DatTruocFragment extends Fragment {
+public class DatTruocFragment extends Fragment{
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bep_dattruoc, container, false);
-//        return super.onCreateView(inflater, container, savedInstanceState);
         FragmentManager fm = getFragmentManager();
 
         android.support.v4.app.FragmentTransaction ft_add = fm.beginTransaction();
@@ -49,12 +48,12 @@ public class DatTruocFragment extends Fragment {
         ft_add.commit();
 
 
-//// replace
+////      replace
 //        FragmentTransaction ft_rep = fm.beginTransaction();
 //        ft_rep.replace(R.id.your_placehodler, new YourFragment());
 //        ft_rep.commit();
 //
-//// remove
+////      remove
 //        Fragment fragment = fm.findFragmentById(R.id.your_placehodler);
 //        FragmentTransaction ft_remo = fm.beginTransaction();
 //        ft_remo.remove(fragment);

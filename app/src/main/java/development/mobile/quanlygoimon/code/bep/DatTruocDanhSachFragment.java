@@ -28,6 +28,8 @@ import java.util.Date;
 import java.util.List;
 
 import development.mobile.quanlygoimon.code.R;
+import development.mobile.quanlygoimon.code.entity.ChiTietHoaDon;
+import development.mobile.quanlygoimon.code.entity.ChiTietPhieuDatTruoc;
 import development.mobile.quanlygoimon.code.entity.PhieuDatTruoc;
 
 public class DatTruocDanhSachFragment extends Fragment{
@@ -45,10 +47,9 @@ public class DatTruocDanhSachFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bep_danhsach_dattruoc, container, false);
 
-        lvPhieuDatTruoc  = (ListView) view.findViewById(R.id.lv_ctdattruoc_dattruoc);
-
         phieuDatTruocArrayList = new ArrayList<PhieuDatTruoc>();
         phieuDatTruocArrayAdapter = new DatTruocDanhSachAdapter(getActivity(), R.layout.item_list_bep_dattruoc, phieuDatTruocArrayList);
+        lvPhieuDatTruoc  = (ListView) view.findViewById(R.id.lv_ctdattruoc_dattruoc);
         lvPhieuDatTruoc.setAdapter(phieuDatTruocArrayAdapter);
         getAllPhieuDatTruoc();
 
@@ -58,16 +59,19 @@ public class DatTruocDanhSachFragment extends Fragment{
                                     long id) {
                 PhieuDatTruoc phieuDatTruoc = phieuDatTruocArrayList.get(position);
                 Bundle bundle = new Bundle();
-                bundle.putString("madt", phieuDatTruoc.getMaDatTruoc());
-                bundle.putString("thoigiannhan", phieuDatTruoc.getThoiGianNhanBan());
-                bundle.putString("soban", phieuDatTruoc.getSoLuongBan() + "");
-                bundle.putString("songuoi", phieuDatTruoc.getSoLuongKhach() + "");
+//                bundle.putString("madt", phieuDatTruoc.getMaDatTruoc());
+//                bundle.putString("thoigiannhan", phieuDatTruoc.getThoiGianNhanBan());
+//                bundle.putString("soban", phieuDatTruoc.getSoLuongBan() + "");
+//                bundle.putString("songuoi", phieuDatTruoc.getSoLuongKhach() + "");
+//                bundle.putSerializable("pdt", (Serializable) phieuDatTruoc);
 
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft_rep = fm.beginTransaction();
+                ft_rep.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                 DatTruocChiTietFragment datTruocChiTietFragment = new DatTruocChiTietFragment();
                 datTruocChiTietFragment.setArguments(bundle);
                 ft_rep.replace(R.id.frame_layout_holder, datTruocChiTietFragment);
+                ft_rep.addToBackStack(null);
                 ft_rep.commit();
             }
         });
@@ -76,14 +80,27 @@ public class DatTruocDanhSachFragment extends Fragment{
     }
 
     private void getAllPhieuDatTruoc(){
-        myRef.child("PhieuDatTruoc").orderByChild("thoiGianNhanBan").startAt(new SimpleDateFormat("dd/MM/yyyy").format(new Date())).endAt(new SimpleDateFormat("dd/MM/yyyy 23:59").format(new Date())).addValueEventListener(new ValueEventListener() {
+        myRef.child("PhieuDatTruoc").orderByChild("thoiGianNhanBan").startAt(new SimpleDateFormat("dd/MM/yyyy").format(new Date()))
+                .endAt(new SimpleDateFormat("dd/MM/yyyy 23:59").format(new Date())).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 phieuDatTruocArrayList.clear();
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
-                    PhieuDatTruoc phieuDatTruoc = child.getValue(PhieuDatTruoc.class);
-                    phieuDatTruocArrayList.add(phieuDatTruoc);
-                    Log.d("\n\n", "PhieuDatTruoc: " + phieuDatTruoc.toString());
+                    for(DataSnapshot childOfChild : child.child("chiTietPhieuDatTruoc").getChildren()){
+                        if (childOfChild.child("loai").getValue(String.class).equals("Bếp")) {
+                            PhieuDatTruoc phieuDatTruoc = child.getValue(PhieuDatTruoc.class);
+                            ArrayList<ChiTietPhieuDatTruoc> lst = new ArrayList<ChiTietPhieuDatTruoc>();
+                            ChiTietPhieuDatTruoc chiTietPhieuDatTruoc = childOfChild.getValue(ChiTietPhieuDatTruoc.class);
+                            lst.add(chiTietPhieuDatTruoc);
+                            Log.d("chiTietPhieuDatTruoc", "chiTietPhieuDatTruoc: " + chiTietPhieuDatTruoc.toString());
+                            phieuDatTruoc.setChiTietPhieuDatTruocArrayList(lst);
+                            if (!phieuDatTruocArrayList.contains(phieuDatTruoc)) {
+//                                phieuDatTruoc.setPushkeyPDT(child.getKey());
+                                phieuDatTruocArrayList.add(phieuDatTruoc);
+                            }
+                            Log.d("lst", "lst: " + lst.toString());
+                        }
+                    }
                 }
                 phieuDatTruocArrayAdapter.notifyDataSetChanged();
             }
@@ -93,5 +110,9 @@ public class DatTruocDanhSachFragment extends Fragment{
                 Toast.makeText(getActivity(), "Lỗi: " + databaseError, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    interface SendPhieuDatTruoc {
+        void sendPhieuDatTruoc(PhieuDatTruoc phieuDatTruoc);
     }
 }

@@ -49,14 +49,6 @@ public class TaiBanDangChoFragment extends Fragment{
         bepTaiBanDangChoAdapter = new BepTaiBanDangChoAdapter(getActivity(), R.layout.item_list_fm_bep_taiban_dangcho, chiTietHoaDonArrayList);
         lvCTHD.setAdapter(bepTaiBanDangChoAdapter);
         getAllHD();
-//        btnCheBien = (ImageButton)view.findViewById(R.id.ibtn_chebien_item_taiban_dangcho);
-//
-//        btnCheBien.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(getContext(), "chebien_: ", Toast.LENGTH_LONG).show();
-//            }
-//        });
 
         return view;
     }
@@ -72,6 +64,8 @@ public class TaiBanDangChoFragment extends Fragment{
                                 && childOfChild.child("trangThai").getValue(String.class).equals("Đang chờ")) {
                             ChiTietHoaDon cthd = childOfChild.getValue(ChiTietHoaDon.class);
                             cthd.setMaHoaDon(child.child("maHoaDon").getValue(String.class));
+                            cthd.setPushkeyHD(dataSnapshot.getKey());
+                            cthd.setPushKeyCTHD(child.getKey());
                             chiTietHoaDonArrayList.add(cthd);
                         }
                     }

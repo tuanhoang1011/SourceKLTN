@@ -58,6 +58,8 @@ public class TaiBanDangCheBienFragment extends Fragment {
                                 && childOfChild.child("trangThai").getValue(String.class).equals("Đang chế biến")) {
                             ChiTietHoaDon cthd = childOfChild.getValue(ChiTietHoaDon.class);
                             cthd.setMaHoaDon(child.child("maHoaDon").getValue(String.class));
+                            cthd.setPushkeyHD(dataSnapshot.getKey());
+                            cthd.setPushKeyCTHD(child.getKey());
                             chiTietHoaDonArrayList.add(cthd);
                         }
                     }
@@ -70,41 +72,5 @@ public class TaiBanDangCheBienFragment extends Fragment {
                 Toast.makeText(getActivity(), "Lỗi: " + databaseError, Toast.LENGTH_SHORT).show();
             }
         });
-//        myRef.child("HoaDon").orderByChild("daThanhToan").equalTo(false).addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//                for(DataSnapshot child : dataSnapshot.child("chiTietHoaDon").getChildren()){
-//                    if (child.child("trangThai").getValue(String.class).equals("Đang chế biến") &&
-//                            child.child("loai").getValue(String.class).equals("Bếp")) {
-//                        ChiTietHoaDon cthd = child.getValue(ChiTietHoaDon.class);
-//                        cthd.setMaHoaDon(dataSnapshot.child("maHoaDon").getValue(String.class));
-//                        cthd.setPushkeyHD(dataSnapshot.getKey());
-//                        cthd.setPushKeyCTHD(child.getKey());
-//                        chiTietHoaDonArrayList.add(cthd);
-//                    }
-//                }
-//                bepTaiBanDangCheBienAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(DataSnapshot dataSnapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
     }
 }

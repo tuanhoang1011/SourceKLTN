@@ -1,6 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/phieuDatTruocLayoutFrag">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="8sp"
+        android:paddingRight="8sp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_madattruoc_item_danhsach_chitiet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView"
+                android:textSize="@dimen/item_textsize_ghichu_bep_dangcho_danhsach_chitiet" />
+
+            <TextView
+                android:id="@+id/tv_thoigiannhanban_item_danhsach_chitiet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView"
+                android:textSize="@dimen/item_textsize_ghichu_bep_dangcho_danhsach_chitiet" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_soban_item_danhsach_chitiet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView"
+                android:textSize="@dimen/item_textsize_ghichu_bep_dangcho_danhsach_chitiet"/>
+
+            <TextView
+                android:id="@+id/tv_songuoi_item_danhsach_chitiet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView"
+                android:textSize="@dimen/item_textsize_ghichu_bep_dangcho_danhsach_chitiet"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_field_tenmonan_item_danhsach_chitiet"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:text="Tên món ăn"
+            android:textStyle="bold"
+            android:textSize="@dimen/item_textsize_tenmonan_bep_dangcho_danhsach_chitiet"/>
+
+        <TextView
+            android:id="@+id/tv_field_soluong_item_danhsach_chitiet"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="Số lượng"
+            android:textStyle="bold"
+            android:textSize="@dimen/item_textsize_soluong_bep_dangcho_danhsach_chitiet"/>
+
+        <TextView
+            android:id="@+id/tv_field_ghichu_item_danhsach_chitiet"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="Ghi chú"
+            android:textStyle="bold"
+            android:textSize="@dimen/item_textsize_ghichu_bep_dangcho_danhsach_chitiet"/>
+    </LinearLayout>
 </LinearLayout>
