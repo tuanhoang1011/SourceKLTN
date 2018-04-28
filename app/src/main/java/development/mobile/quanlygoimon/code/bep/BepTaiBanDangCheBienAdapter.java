@@ -42,20 +42,30 @@ public class BepTaiBanDangCheBienAdapter extends ArrayAdapter<ChiTietHoaDon> {
 
         if (myArray.size() > 0 && position >= 0) {
             final ChiTietHoaDon cthd = myArray.get(position);
-            final TextView tvIdHDItemTaibanDangCheBien = (TextView)convertView.findViewById(R.id.tv_idhd_item_taiban_dangchebien);
+            final TextView tvIdHDItemTaibanDangCheBien = (TextView) convertView.findViewById(R.id.tv_idhd_item_taiban_dangchebien);
             tvIdHDItemTaibanDangCheBien.setText(cthd.getMaHoaDon().toString());
-            final TextView tvTenMonAnItemTaibanDangCheBien = (TextView)convertView.findViewById(R.id.tv_tenmonan_item_taiban_dangchebien);
+            final TextView tvTenMonAnItemTaibanDangCheBien = (TextView) convertView.findViewById(R.id.tv_tenmonan_item_taiban_dangchebien);
             tvTenMonAnItemTaibanDangCheBien.setText(cthd.getTenMonAn().toString());
-            final TextView tvSoLuongItemTaibanDangCheBien = (TextView)convertView.findViewById(R.id.tv_soluong_item_taiban_dangchebien);
+            final TextView tvSoLuongItemTaibanDangCheBien = (TextView) convertView.findViewById(R.id.tv_soluong_item_taiban_dangchebien);
             tvSoLuongItemTaibanDangCheBien.setText(cthd.getSoLuong() + "");
-            final TextView tvGhiChuItemTaibanDangCheBien = (TextView)convertView.findViewById(R.id.tv_ghichu_item_taiban_dangchebien);
+            final TextView tvGhiChuItemTaibanDangCheBien = (TextView) convertView.findViewById(R.id.tv_ghichu_item_taiban_dangchebien);
             tvGhiChuItemTaibanDangCheBien.setText(cthd.getGhiChu());
-            final ImageButton ibtnHoanThanhMonAn = (ImageButton)convertView.findViewById(R.id.ibtn_hoanthanhmonan_item_taiban_dangchebien);
+            final ImageButton ibtnHoanThanhMonAn = (ImageButton) convertView.findViewById(R.id.ibtn_hoanthanhmonan_item_taiban_dangchebien);
+            final ImageButton ibtnTamNgungPhucVu = (ImageButton) convertView.findViewById(R.id.ibtn_tamngungphucvu_item_taiban_dangchebien);
 
             ibtnHoanThanhMonAn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getContext(), "HoanThanhMonAn: " + cthd.getPushKeyCTHD(), Toast.LENGTH_LONG).show();
+                    myRef.child("HoaDon").child(cthd.getPushkeyHD()).child("chiTietHoaDon").child(cthd.getPushKeyCTHD())
+                            .child("trangThai").setValue("Chế biến xong");
+                }
+            });
+
+            ibtnTamNgungPhucVu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    myRef.child("HoaDon").child(cthd.getPushkeyHD()).child("chiTietHoaDon").child(cthd.getPushKeyCTHD())
+                            .child("trangThai").setValue("Tạm ngưng");
                 }
             });
         }

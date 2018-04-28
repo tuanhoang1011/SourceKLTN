@@ -1,9 +1,10 @@
 package development.mobile.quanlygoimon.code.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class PhieuDatTruoc {
+public class PhieuDatTruoc implements Serializable{
     private String maDatTruoc;
     private int maNhanVien;
     private String tenNhanVien;

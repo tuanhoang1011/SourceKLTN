@@ -2,6 +2,7 @@ package development.mobile.quanlygoimon.code.bep;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,8 +59,8 @@ public class TaiBanDangCheBienFragment extends Fragment {
                                 && childOfChild.child("trangThai").getValue(String.class).equals("Đang chế biến")) {
                             ChiTietHoaDon cthd = childOfChild.getValue(ChiTietHoaDon.class);
                             cthd.setMaHoaDon(child.child("maHoaDon").getValue(String.class));
-                            cthd.setPushkeyHD(dataSnapshot.getKey());
-                            cthd.setPushKeyCTHD(child.getKey());
+                            cthd.setPushkeyHD(child.getKey());
+                            cthd.setPushKeyCTHD(childOfChild.getKey());
                             chiTietHoaDonArrayList.add(cthd);
                         }
                     }

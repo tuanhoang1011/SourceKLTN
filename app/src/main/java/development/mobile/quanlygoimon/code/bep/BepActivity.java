@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -30,7 +31,7 @@ import development.mobile.quanlygoimon.code.entity.PhieuDatTruoc;
 import development.mobile.quanlygoimon.code.phucvuchonban.PagerAdapter;
 import development.mobile.quanlygoimon.code.phucvuchonban.PhucVuActivity;
 
-public class BepActivity extends AppCompatActivity  implements DatTruocDanhSachFragment.SendPhieuDatTruoc {
+public class BepActivity extends AppCompatActivity {
 
     private ViewPager pagerBep;
     private PagerAdapterBep adapterBep;
@@ -125,11 +126,5 @@ public class BepActivity extends AppCompatActivity  implements DatTruocDanhSachF
         tenNV = sharePre.getString("tenNhanVien", "");
         pushKeyNV = sharePre.getString("pushKeyNhanVien", "");
         titleToolbarTxtView.setText(maNV + "-" + tenNV);
-    }
-
-    @Override
-    public void sendPhieuDatTruoc(PhieuDatTruoc phieuDatTruoc) {
-        DatTruocChiTietFragment datTruocChiTietFragment = (DatTruocChiTietFragment) getSupportFragmentManager().findFragmentById(R.id.phieuDatTruocLayoutFrag);
-        datTruocChiTietFragment.getPhieuDatTruocFromDatTruocDSFrag(phieuDatTruoc);
     }
 }

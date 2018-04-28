@@ -69,14 +69,11 @@
             android:layout_height="76sp"
             android:layout_weight="1"
             app:srcCompat="@drawable/icon_chebienmonan" />
-
         <ImageButton
             android:id="@+id/ibtn_tamngungphucvu_item_taiban_dangcho"
             android:layout_width="76sp"
             android:layout_height="76sp"
             android:layout_weight="1"
             app:srcCompat="@android:drawable/ic_delete" />
-
     </LinearLayout>
-
 </LinearLayout>

@@ -36,7 +36,7 @@ public class BepTaiBanDangChoAdapter extends ArrayAdapter<ChiTietHoaDon> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater = activity.getLayoutInflater();
         convertView = inflater.inflate(layoutId, null);
 
@@ -56,13 +56,16 @@ public class BepTaiBanDangChoAdapter extends ArrayAdapter<ChiTietHoaDon> {
             ibtnCheBienItemTaibanDangCho.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getContext(), "CheBien", Toast.LENGTH_LONG).show();
+                    myRef.child("HoaDon").child(cthd.getPushkeyHD()).child("chiTietHoaDon").child(cthd.getPushKeyCTHD())
+                            .child("trangThai").setValue("Đang chế biến");
+
                 }
             });
             ibtnTamNgungPhucVuItemTaibanDangCho.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getContext(), "TamNgung", Toast.LENGTH_LONG).show();
+                    myRef.child("HoaDon").child(cthd.getPushkeyHD()).child("chiTietHoaDon").child(cthd.getPushKeyCTHD())
+                            .child("trangThai").setValue("Tạm ngưng");
                 }
             });
         }

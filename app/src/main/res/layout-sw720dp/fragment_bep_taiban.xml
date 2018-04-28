@@ -3,22 +3,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
-    <fragment
-        android:id="@+id/lst_fm_bep_taiban_dangcho"
-        android:name="development.mobile.quanlygoimon.code.bep.TaiBanDangChoFragment"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        tools:layout="@layout/fragment_bep_taiban_dangcho" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
 
-    <fragment
-        android:id="@+id/lst_fm_bep_taiban_dangchebien"
-        android:name="development.mobile.quanlygoimon.code.bep.TaiBanDangCheBienFragment"
-        android:layout_width="0dp"
+        <TextView
+            android:id="@+id/tv_field_tabtaiban_dangcho"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Đang chờ"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_field_tabtaiban_dangchebien"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Đang chế biến"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        tools:layout="@layout/fragment_bep_taiban_dangchebien" />
+        android:orientation="horizontal">
+        <fragment
+            android:id="@+id/lst_fm_bep_taiban_dangcho"
+            android:name="development.mobile.quanlygoimon.code.bep.TaiBanDangChoFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:layout="@layout/fragment_bep_taiban_dangcho" />
+
+        <fragment
+            android:id="@+id/lst_fm_bep_taiban_dangchebien"
+            android:name="development.mobile.quanlygoimon.code.bep.TaiBanDangCheBienFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:layout="@layout/fragment_bep_taiban_dangchebien" />
+    </LinearLayout>
 
 </LinearLayout>

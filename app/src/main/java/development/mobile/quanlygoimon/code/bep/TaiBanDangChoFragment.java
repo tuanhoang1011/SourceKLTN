@@ -64,8 +64,8 @@ public class TaiBanDangChoFragment extends Fragment{
                                 && childOfChild.child("trangThai").getValue(String.class).equals("Đang chờ")) {
                             ChiTietHoaDon cthd = childOfChild.getValue(ChiTietHoaDon.class);
                             cthd.setMaHoaDon(child.child("maHoaDon").getValue(String.class));
-                            cthd.setPushkeyHD(dataSnapshot.getKey());
-                            cthd.setPushKeyCTHD(child.getKey());
+                            cthd.setPushkeyHD(child.getKey());
+                            cthd.setPushKeyCTHD(childOfChild.getKey());
                             chiTietHoaDonArrayList.add(cthd);
                         }
                     }
