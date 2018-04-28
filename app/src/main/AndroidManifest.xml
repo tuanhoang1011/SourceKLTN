@@ -16,9 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".phucvuchonban.PhucVuActivity"/>
-        <activity android:name=".goimon.GoiMonActivity"/>
+        <activity android:name=".phucvuchonban.PhucVuActivity" />
+        <activity android:name=".goimon.GoiMonActivity" />
         <activity android:name=".bep.BepActivity" />
+        <activity android:name=".phache.PhaCheActivity"></activity>
     </application>
 
 </manifest>

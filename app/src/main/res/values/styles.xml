@@ -18,4 +18,8 @@
     <style name="BepCustomTabText" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">30sp</item>
     </style>
+
+    <style name="PhaCheCustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">30sp</item>
+    </style>
 </resources>
