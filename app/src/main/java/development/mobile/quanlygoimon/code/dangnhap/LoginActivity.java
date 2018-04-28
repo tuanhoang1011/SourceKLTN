@@ -21,6 +21,7 @@ import development.mobile.quanlygoimon.code.bep.BepActivity;
 import development.mobile.quanlygoimon.code.entity.NhanVien;
 import development.mobile.quanlygoimon.code.phache.PhaCheActivity;
 import development.mobile.quanlygoimon.code.phucvuchonban.PhucVuActivity;
+import development.mobile.quanlygoimon.code.quanly.QuanLyActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -93,6 +94,11 @@ public class LoginActivity extends AppCompatActivity {
                                                         startActivity(intent);
                                                         finish();
                                                     }
+                                                    if (chucVu.trim().equals("QuanLy")) {
+                                                        Intent intent = new Intent(LoginActivity.this, QuanLyActivity.class);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    }
                                                 }
                                             } else {
                                                 if (chucVu.equals("PhucVu")) {
@@ -156,6 +162,10 @@ public class LoginActivity extends AppCompatActivity {
             }
             else if(chucVu.equals("PhaChe")){
                 Intent intent = new Intent(LoginActivity.this, PhaCheActivity.class);
+                startActivity(intent);
+                finish();
+            } else if(chucVu.equals("QuanLy")) {
+                Intent intent = new Intent(LoginActivity.this, QuanLyActivity.class);
                 startActivity(intent);
                 finish();
             }

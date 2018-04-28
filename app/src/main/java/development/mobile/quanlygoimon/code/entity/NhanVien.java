@@ -1,6 +1,8 @@
 package development.mobile.quanlygoimon.code.entity;
 
-public class NhanVien {
+import java.io.Serializable;
+
+public class NhanVien implements Serializable{
     private int maNhanVien;
     private String tenNhanVien;
     private String ngaySinh;
@@ -8,6 +10,7 @@ public class NhanVien {
     private String soDienThoai;
     private String chucVu;
     private boolean dangNhap;
+    private String pushkeyNV;
 
     public NhanVien() {
     }
@@ -76,6 +79,14 @@ public class NhanVien {
 
     public void setDangNhap(boolean dangNhap) {
         this.dangNhap = dangNhap;
+    }
+
+    public String getPushkeyNV() {
+        return pushkeyNV;
+    }
+
+    public void setPushkeyNV(String pushkeyNV) {
+        this.pushkeyNV = pushkeyNV;
     }
 
     @Override

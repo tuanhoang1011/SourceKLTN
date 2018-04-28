@@ -19,7 +19,9 @@
         <activity android:name=".phucvuchonban.PhucVuActivity" />
         <activity android:name=".goimon.GoiMonActivity" />
         <activity android:name=".bep.BepActivity" />
-        <activity android:name=".phache.PhaCheActivity"></activity>
+        <activity android:name=".phache.PhaCheActivity" />
+        <activity android:name=".quanly.QuanLyActivity" />
+        <activity android:name=".quanly.quanlynhanvien.QuanLyNhanVienActivity"></activity>
     </application>
 
 </manifest>
