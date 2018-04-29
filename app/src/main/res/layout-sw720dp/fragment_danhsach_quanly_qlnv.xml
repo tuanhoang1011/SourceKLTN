@@ -18,9 +18,9 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="4"
             android:gravity="fill_vertical"
-            android:text="Mã nhân viên"
-            android:textStyle="bold"
-            android:textSize="@dimen/field_textsize_quanly_qlnv"/>
+            android:text="Mã NV"
+            android:textSize="@dimen/field_textsize_quanly_qlnv"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_field_tennv_item_quanly_qlnv"
@@ -61,12 +61,11 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:text=""
-            android:textStyle="bold"
             android:textSize="@dimen/field_textsize_quanly_qlnv"/>
     </LinearLayout>
 
     <ListView
         android:id="@+id/lv_nhanvien_quanly_qlnv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"/>
 </LinearLayout>

@@ -1,6 +1,10 @@
 package development.mobile.quanlygoimon.code.entity;
 
+import com.google.firebase.database.Exclude;
+
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class NhanVien implements Serializable{
     private int maNhanVien;
@@ -100,5 +104,19 @@ public class NhanVien implements Serializable{
                 ", chucVu='" + chucVu + '\'' +
                 ", dangNhap=" + dangNhap +
                 '}';
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("maNhanVien", maNhanVien);
+        result.put("tenNhanVien", tenNhanVien);
+        result.put("ngaySinh", ngaySinh);
+        result.put("diaChi", diaChi);
+        result.put("soDienThoai", soDienThoai);
+        result.put("chucVu", chucVu);
+        result.put("dangNhap", dangNhap);
+
+        return result;
     }
 }

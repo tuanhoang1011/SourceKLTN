@@ -63,16 +63,18 @@ public class QuanLyNhanVienDanhSachAdapter extends ArrayAdapter<NhanVien> {
                     if (nv.isDangNhap()) {
                         Toast.makeText(getContext(), "Nhân viên đang online. Không thể xóa", Toast.LENGTH_LONG).show();
                     } else {
-                        myRef.child("NhanVien").child(nv.getPushkeyNV()).removeValue(new DatabaseReference.CompletionListener() {
-                            @Override
-                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                                Toast.makeText(getContext(), "Đã xóa nhân viên " + nv.getMaNhanVien(), Toast.LENGTH_LONG).show();
-                            }
-                        });
+//                        myRef.child("NhanVien").child(nv.getPushkeyNV()).removeValue(new DatabaseReference.CompletionListener() {
+//                            @Override
+//                            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+//                                Toast.makeText(getContext(), "Đã xóa nhân viên " + nv.getMaNhanVien(), Toast.LENGTH_LONG).show();
+//                            }
+//                        });
                     }
-
                 }
             });
+
+            ibtnXoa.setFocusable(false);
+            ibtnXoa.setFocusableInTouchMode(false);
         }
 
         return convertView;

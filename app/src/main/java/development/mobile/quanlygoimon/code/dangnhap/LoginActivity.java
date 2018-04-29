@@ -83,8 +83,6 @@ public class LoginActivity extends AppCompatActivity {
                                                         finish();
                                                     }
                                                     if (chucVu.trim().equals("Bep")) {
-//                                                        myRef.child("NhanVien").push()
-//                                                                .setValue(new NhanVien(5555, "Teo", "", "", "", "PhaChe", false));
                                                         Intent intent = new Intent(LoginActivity.this, BepActivity.class);
                                                         startActivity(intent);
                                                         finish();
@@ -95,6 +93,9 @@ public class LoginActivity extends AppCompatActivity {
                                                         finish();
                                                     }
                                                     if (chucVu.trim().equals("QuanLy")) {
+//                                                        myRef.child("NhanVien").push()
+//                                                                .setValue(new NhanVien(2222, "Phan Phúc Thọ", "25/10/1978", "Q3 HCM", "0129494989", "Bep", false));
+
                                                         Intent intent = new Intent(LoginActivity.this, QuanLyActivity.class);
                                                         startActivity(intent);
                                                         finish();
