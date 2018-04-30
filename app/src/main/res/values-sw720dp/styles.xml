@@ -15,8 +15,4 @@
 
     <bool name="isHandset">false</bool>
 
-    <style name="qlnv.Searching" parent="TextAppearance.Design.Tab">
-        <item name="android:textColorPrimary">@android:color/white</item>
-    </style>
-
 </resources>
