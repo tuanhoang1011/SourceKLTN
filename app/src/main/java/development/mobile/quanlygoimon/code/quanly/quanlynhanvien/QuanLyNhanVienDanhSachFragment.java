@@ -39,6 +39,7 @@ public class QuanLyNhanVienDanhSachFragment extends Fragment {
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
+    private ValueEventListener listener;
 
     public QuanLyNhanVienDanhSachFragment() {
     }
@@ -123,7 +124,7 @@ public class QuanLyNhanVienDanhSachFragment extends Fragment {
     }
 
     private void getAllNV(){
-        myRef.child("NhanVien").addValueEventListener(new ValueEventListener() {
+        listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 nhanVienArrayList.clear();
@@ -140,6 +141,15 @@ public class QuanLyNhanVienDanhSachFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(getActivity(), "Lỗi: " + databaseError, Toast.LENGTH_SHORT).show();
             }
-        });
+        };
+        myRef.child("NhanVien").addValueEventListener(listener);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+       if (listener != null) {
+           myRef.child("NhanVien").removeEventListener(listener);
+       }
     }
 }

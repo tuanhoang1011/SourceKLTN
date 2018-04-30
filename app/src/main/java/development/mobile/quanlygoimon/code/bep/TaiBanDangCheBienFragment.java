@@ -2,16 +2,12 @@ package development.mobile.quanlygoimon.code.bep;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +27,7 @@ public class TaiBanDangCheBienFragment extends Fragment {
     private ListView lvCTHD;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
+    private ValueEventListener listener;
 
     public TaiBanDangCheBienFragment() {
     }
@@ -49,7 +46,7 @@ public class TaiBanDangCheBienFragment extends Fragment {
     }
 
     private void getAllHD(){
-        myRef.child("HoaDon").orderByChild("daThanhToan").equalTo(false).addValueEventListener(new ValueEventListener() {
+        listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 chiTietHoaDonArrayList.clear();
@@ -72,6 +69,16 @@ public class TaiBanDangCheBienFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(getActivity(), "Lỗi: " + databaseError, Toast.LENGTH_SHORT).show();
             }
-        });
+        };
+        myRef.child("HoaDon").orderByChild("daThanhToan").equalTo(false).addValueEventListener(listener);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (listener != null) {
+            myRef.child("HoaDon").orderByChild("daThanhToan").equalTo(false).removeEventListener(listener);
+        }
+    }
+
 }

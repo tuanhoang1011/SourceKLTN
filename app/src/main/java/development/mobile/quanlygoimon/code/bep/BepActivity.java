@@ -12,9 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,9 +25,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import development.mobile.quanlygoimon.code.R;
 import development.mobile.quanlygoimon.code.dangnhap.LoginActivity;
-import development.mobile.quanlygoimon.code.entity.PhieuDatTruoc;
-import development.mobile.quanlygoimon.code.phucvuchonban.PagerAdapter;
-import development.mobile.quanlygoimon.code.phucvuchonban.PhucVuActivity;
 
 public class BepActivity extends AppCompatActivity {
 

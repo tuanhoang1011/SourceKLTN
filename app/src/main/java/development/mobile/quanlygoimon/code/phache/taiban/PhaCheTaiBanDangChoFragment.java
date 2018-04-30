@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,17 +18,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import development.mobile.quanlygoimon.code.R;
-import development.mobile.quanlygoimon.code.bep.BepTaiBanDangChoAdapter;
 import development.mobile.quanlygoimon.code.entity.ChiTietHoaDon;
 
 public class PhaCheTaiBanDangChoFragment extends Fragment{
 
-    private ImageButton btnCheBien, btnTamNgungPhucVu;
     private List<ChiTietHoaDon> chiTietHoaDonArrayList = null;
     private PhaCheTaiBanDangChoAdapter phaCheTaiBanDangChoAdapter = null;
     private ListView lvCTHD;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
+    private ValueEventListener listener;
 
     public PhaCheTaiBanDangChoFragment() {
     }
@@ -48,7 +46,7 @@ public class PhaCheTaiBanDangChoFragment extends Fragment{
     }
 
     private void getAllHD(){
-        myRef.child("HoaDon").orderByChild("daThanhToan").equalTo(false).addValueEventListener(new ValueEventListener() {
+        listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 chiTietHoaDonArrayList.clear();
@@ -71,6 +69,15 @@ public class PhaCheTaiBanDangChoFragment extends Fragment{
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(getActivity(), "Lỗi: " + databaseError, Toast.LENGTH_SHORT).show();
             }
-        });
+        };
+        myRef.child("HoaDon").orderByChild("daThanhToan").equalTo(false).addValueEventListener(listener);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (listener != null) {
+            myRef.child("HoaDon").orderByChild("daThanhToan").equalTo(false).removeEventListener(listener);
+        }
     }
 }

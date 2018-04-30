@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import development.mobile.quanlygoimon.code.R;
-import development.mobile.quanlygoimon.code.bep.BepTaiBanDangCheBienAdapter;
 import development.mobile.quanlygoimon.code.entity.ChiTietHoaDon;
 
 public class PhaCheTaiBanDangCheBienFragment extends Fragment {
@@ -28,6 +27,7 @@ public class PhaCheTaiBanDangCheBienFragment extends Fragment {
     private ListView lvCTHD;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
+    private ValueEventListener listener;
 
     public PhaCheTaiBanDangCheBienFragment() {
     }
@@ -46,7 +46,7 @@ public class PhaCheTaiBanDangCheBienFragment extends Fragment {
     }
 
     private void getAllHD(){
-        myRef.child("HoaDon").orderByChild("daThanhToan").equalTo(false).addValueEventListener(new ValueEventListener() {
+        listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 chiTietHoaDonArrayList.clear();
@@ -69,6 +69,15 @@ public class PhaCheTaiBanDangCheBienFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(getActivity(), "Lỗi: " + databaseError, Toast.LENGTH_SHORT).show();
             }
-        });
+        };
+        myRef.child("HoaDon").orderByChild("daThanhToan").equalTo(false).addValueEventListener(listener);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (listener != null) {
+            myRef.child("HoaDon").orderByChild("daThanhToan").equalTo(false).removeEventListener(listener);
+        }
     }
 }

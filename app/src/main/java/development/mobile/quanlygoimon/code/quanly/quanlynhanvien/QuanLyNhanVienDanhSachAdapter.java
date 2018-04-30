@@ -100,8 +100,6 @@ public class QuanLyNhanVienDanhSachAdapter extends ArrayAdapter<NhanVien> {
                                             }
                                         });
                                 alertDialog.show();
-
-                                Toast.makeText(getContext(), "Nhân viên đang online. Không thể xóa", Toast.LENGTH_LONG).show();
                             } else {
                                 myRef.child("NhanVien").child(nv.getPushkeyNV()).removeValue(new DatabaseReference.CompletionListener() {
                                     @Override

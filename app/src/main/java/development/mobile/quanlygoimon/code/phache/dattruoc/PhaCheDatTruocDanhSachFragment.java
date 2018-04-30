@@ -34,6 +34,7 @@ public class PhaCheDatTruocDanhSachFragment extends Fragment{
     private List<PhieuDatTruoc> phieuDatTruocArrayList = null;
     private ArrayAdapter<PhieuDatTruoc> phieuDatTruocArrayAdapter = null;
     private ListView lvPhieuDatTruoc;
+    private ValueEventListener listener;
 
     public PhaCheDatTruocDanhSachFragment() {
     }
@@ -73,9 +74,7 @@ public class PhaCheDatTruocDanhSachFragment extends Fragment{
     }
 
     private void getAllPhieuDatTruoc(){
-        myRef.child("PhieuDatTruoc").orderByChild("thoiGianNhanBan").startAt(new SimpleDateFormat("dd/MM/yyyy").format(new Date()))
-                .endAt(new SimpleDateFormat("dd/MM/yyyy 23:59").format(new Date())).addValueEventListener(new ValueEventListener() {
-
+        listener = new ValueEventListener() {
             PhieuDatTruoc tmp = new PhieuDatTruoc();
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -101,6 +100,18 @@ public class PhaCheDatTruocDanhSachFragment extends Fragment{
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(getActivity(), "Lỗi: " + databaseError, Toast.LENGTH_SHORT).show();
             }
-        });
+        };
+        myRef.child("PhieuDatTruoc").orderByChild("thoiGianNhanBan").startAt(new SimpleDateFormat("dd/MM/yyyy").format(new Date()))
+                .endAt(new SimpleDateFormat("dd/MM/yyyy 23:59").format(new Date())).addValueEventListener(listener);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (listener != null) {
+            myRef.child("PhieuDatTruoc").orderByChild("thoiGianNhanBan").startAt(new SimpleDateFormat("dd/MM/yyyy").format(new Date()))
+                    .endAt(new SimpleDateFormat("dd/MM/yyyy 23:59").format(new Date())).removeEventListener(listener);
+        }
+    }
+
 }
