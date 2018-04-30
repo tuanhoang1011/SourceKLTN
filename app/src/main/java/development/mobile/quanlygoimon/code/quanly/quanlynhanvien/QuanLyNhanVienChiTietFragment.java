@@ -15,8 +15,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +39,11 @@ public class QuanLyNhanVienChiTietFragment extends Fragment {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
 
-    List<String> chucVuLst= new ArrayList<>();
-    List<String> chucVuDBLst= new ArrayList<>();
+    private List<String> chucVuLst= new ArrayList<>();
+    private List<String> chucVuDBLst= new ArrayList<>();
 
-    String pushkeyNVHienTai;
-    NhanVien nv = new NhanVien();
+    private String pushkeyNVHienTai;
+    private NhanVien nv = new NhanVien();
 
     public QuanLyNhanVienChiTietFragment() {
     }
@@ -103,13 +106,13 @@ public class QuanLyNhanVienChiTietFragment extends Fragment {
             public void onClick(View view) {
                 if (btnSua.getText().toString().equals("Sửa")) {
                     setFocusEditText(true);
+                    edtMaNV.setEnabled(false);
                     btnSua.setText("Hủy");
                 } else if (btnSua.getText().toString().equals("Thêm")) {
                     setFocusEditText(true);
                     clearDataInputNV();
                     btnSua.setText("Hủy");
                 } else if (btnSua.getText().toString().equals("Hủy")) {
-                    clearAlertErrorDataInput();
                     if (tvTitle.getText().equals("Chi tiết nhân viên")) {
                         setFocusEditText(false);
                         btnSua.setEnabled(true);
@@ -121,6 +124,7 @@ public class QuanLyNhanVienChiTietFragment extends Fragment {
                         btnSua.setEnabled(true);
                         clearDataInputNV();
                     }
+                    clearAlertErrorDataInput();
                 }
             }
         });
@@ -129,7 +133,32 @@ public class QuanLyNhanVienChiTietFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (tvTitle.getText().equals("Chi tiết nhân viên")) {
-                    if (isValidDataInput()) {
+                    boolean check = true;
+
+                    String regexTenNV = "^[\\p{L}\\s]+$";
+                    if (!Pattern.matches(regexTenNV, edtTenNV.getText())) {
+                        edtTenNV.setError("Vui lòng nhập mã nhân viên là chữ và không chứa ký tự đặc biệt từ 1 ký tự trở lên");
+                        check = false;
+                    }
+
+                    String regexNgaySinh = "^(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/(19\\d{2}|2\\d{3})$";
+                    if (!Pattern.matches(regexNgaySinh, edtNgaySinh.getText())) {
+                        edtNgaySinh.setError("Vui lòng nhập đúng định dạng ngày dd/mm/yyyy và năm từ 1900 đến 2999");
+                        check = false;
+                    }
+
+                    if (edtDiaChi.getText().length() < 1) {
+                        edtDiaChi.setError("Vui lòng nhập tên nhân từ 1 ký tự trở lên");
+                        check = false;
+                    }
+
+                    String regexSDT = "^0\\d{9}|0\\d{10}|0\\d{11}$";
+                    if (!Pattern.matches(regexSDT, edtSDT.getText())) {
+                        edtSDT.setError("Vui lòng nhập đúng định dạng số điện thoại");
+                        check = false;
+                    }
+
+                    if (check) {
                         setFocusEditText(false);
                         btnSua.setEnabled(true);
                         btnSua.setText("Sửa");
@@ -139,17 +168,67 @@ public class QuanLyNhanVienChiTietFragment extends Fragment {
                         suaThongTinNhanVien(updateNV);
                     }
                 } else if (tvTitle.getText().equals("Thêm mới nhân viên")) {
-                    if (isValidDataInput()) {
-                        setFocusEditText(false);
-                        btnSua.setEnabled(true);
-                        btnSua.setText("Thêm");
-                        NhanVien newNV = new NhanVien(Integer.parseInt(edtMaNV.getText().toString().trim()), edtTenNV.getText().toString().trim(),
-                                edtNgaySinh.getText().toString(), edtDiaChi.getText().toString().trim(),
-                                edtSDT.getText().toString(), chucVuDBLst.get(spnChucVu.getSelectedItemPosition()), false);
+                    myRef.child("NhanVien").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            boolean check = true;
 
-                        themNhanVien(newNV);
-                        clearDataInputNV();
-                    }
+                            for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                if (child.child("maNhanVien").getValue(Integer.class) == Integer.parseInt(edtMaNV.getText().toString())) {
+                                    edtMaNV.setError("Mã nhân viên trùng. Vui lòng nhập lại");
+                                    // notDuplicate = false;
+                                    check = false;
+                                    break;
+                                }
+                            }
+
+                            String regexMaNV = "^\\d{4}$";
+                            if (!Pattern.matches(regexMaNV, edtMaNV.getText())) {
+                                edtMaNV.setError("Vui lòng nhập mã nhân viên là 4 ký tự số");
+                                check = false;
+                            }
+
+                            String regexTenNV = "^[\\p{L}\\s]+$";
+                            if (!Pattern.matches(regexTenNV, edtTenNV.getText())) {
+                                edtTenNV.setError("Vui lòng nhập mã nhân viên là chữ và không chứa ký tự đặc biệt từ 1 ký tự trở lên");
+                                check = false;
+                            }
+
+                            String regexNgaySinh = "^(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/(19\\d{2}|2\\d{3})$";
+                            if (!Pattern.matches(regexNgaySinh, edtNgaySinh.getText())) {
+                                edtNgaySinh.setError("Vui lòng nhập đúng định dạng ngày dd/mm/yyyy và năm từ 1900 đến 2999");
+                                check = false;
+                            }
+
+                            if (edtDiaChi.getText().length() < 1) {
+                                edtDiaChi.setError("Vui lòng nhập tên nhân từ 1 ký tự trở lên");
+                                check = false;
+                            }
+
+                            String regexSDT = "^0\\d{9}|0\\d{10}|0\\d{11}$";
+                            if (!Pattern.matches(regexSDT, edtSDT.getText())) {
+                                edtSDT.setError("Vui lòng nhập đúng định dạng số điện thoại");
+                                check = false;
+                            }
+
+                            if (check) {
+                                setFocusEditText(false);
+                                btnSua.setEnabled(true);
+                                btnSua.setText("Thêm");
+                                NhanVien newNV = new NhanVien(Integer.parseInt(edtMaNV.getText().toString().trim()), edtTenNV.getText().toString().trim(),
+                                        edtNgaySinh.getText().toString(), edtDiaChi.getText().toString().trim(),
+                                        edtSDT.getText().toString(), chucVuDBLst.get(spnChucVu.getSelectedItemPosition()), false);
+
+                                themNhanVien(newNV);
+                                clearDataInputNV();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
                 }
             }
         });
@@ -182,10 +261,10 @@ public class QuanLyNhanVienChiTietFragment extends Fragment {
                 Toast.makeText(getActivity(), "Đã thêm nhân viên " + maNV, Toast.LENGTH_LONG).show();
             }
         });
-
     }
 
     private void suaThongTinNhanVien(NhanVien updateNV){
+        updateNV.setMaNhanVien(nv.getMaNhanVien());
         Map<String, Object> nvMapValues = updateNV.toMap();
 
         myRef.child("NhanVien").child(pushkeyNVHienTai).updateChildren(nvMapValues);
@@ -197,18 +276,22 @@ public class QuanLyNhanVienChiTietFragment extends Fragment {
             @Override
             public void onFocusChange(View view, boolean b) {
                 String regex = "^\\d{4}$";
-                if (!Pattern.matches(regex, edtMaNV.getText()))
-                    edtMaNV.setError("Vui lòng nhập mã nhân viên từ 4 ký tự số trở lên");
+                if (!Pattern.matches(regex, edtMaNV.getText())) {
+                    edtMaNV.setError("Vui lòng nhập mã nhân viên là 4 ký tự số");
+                }
             }
         });
 
         edtTenNV.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                if (edtTenNV.getText().length() < 1)
-                    edtTenNV.setError("Vui lòng nhập tên nhân viên từ 1 ký tự trở lên");
+                String regex = "^[\\p{L}\\s]+$";
+                if (!Pattern.matches(regex, edtTenNV.getText())) {
+                    edtTenNV.setError("Vui lòng nhập mã nhân viên là chữ và không chứa ký tự đặc biệt từ 1 ký tự trở lên");
+                }
             }
         });
+
         edtNgaySinh.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -235,38 +318,6 @@ public class QuanLyNhanVienChiTietFragment extends Fragment {
                     edtSDT.setError("Vui lòng nhập đúng định dạng số điện thoại");
             }
         });
-    }
-
-    private boolean isValidDataInput() {
-        String regexMaNV = "^\\d{4}$";
-        if (!Pattern.matches(regexMaNV, edtMaNV.getText())) {
-            edtMaNV.setError("Vui lòng nhập mã nhân viên từ 4 ký tự số trở lên");
-            return false;
-        }
-
-        if (edtTenNV.getText().length() < 1) {
-            edtTenNV.setError("Vui lòng nhập tên nhân từ 1 ký tự trở lên");
-            return false;
-        }
-
-        String regexNgaySinh = "^(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/(19\\d{2}|2\\d{3})$";
-        if (!Pattern.matches(regexNgaySinh, edtNgaySinh.getText())) {
-            edtNgaySinh.setError("Vui lòng nhập đúng định dạng ngày dd/mm/yyyy và năm từ 1900 đến 2999");
-            return false;
-        }
-
-        if (edtDiaChi.getText().length() < 1) {
-            edtDiaChi.setError("Vui lòng nhập tên nhân từ 1 ký tự trở lên");
-            return false;
-        }
-
-        String regexSDT = "^0\\d{9}|0\\d{10}|0\\d{11}$";
-        if (!Pattern.matches(regexSDT, edtSDT.getText())) {
-            edtSDT.setError("Vui lòng nhập đúng định dạng số điện thoại");
-            return false;
-        }
-
-        return true;
     }
 
     private void setFocusEditText(boolean b) {

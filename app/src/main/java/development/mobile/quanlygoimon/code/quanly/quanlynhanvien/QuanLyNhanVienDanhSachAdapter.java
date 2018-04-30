@@ -21,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.List;
 
 import development.mobile.quanlygoimon.code.R;
-import development.mobile.quanlygoimon.code.entity.ChiTietHoaDon;
 import development.mobile.quanlygoimon.code.entity.NhanVien;
 
 public class QuanLyNhanVienDanhSachAdapter extends ArrayAdapter<NhanVien> {
