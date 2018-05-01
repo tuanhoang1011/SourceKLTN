@@ -1,10 +1,21 @@
 package development.mobile.quanlygoimon.code.entity;
 
-public class KhuVuc {
+import com.google.firebase.database.Exclude;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+public class KhuVuc implements Serializable{
     private int maKhuVuc;
     private String tenKhuVuc;
+    private String pushkeyKV;
 
     public KhuVuc() {
+    }
+
+    public KhuVuc(String tenKhuVuc) {
+        this.tenKhuVuc = tenKhuVuc;
     }
 
     public KhuVuc(int maKhuVuc, String tenKhuVuc) {
@@ -28,11 +39,28 @@ public class KhuVuc {
         this.tenKhuVuc = tenKhuVuc;
     }
 
+    public String getPushkeyKV() {
+        return pushkeyKV;
+    }
+
+    public void setPushkeyKV(String pushkeyKV) {
+        this.pushkeyKV = pushkeyKV;
+    }
+
     @Override
     public String toString() {
         return "KhuVuc{" +
                 "maKhuVuc=" + maKhuVuc +
                 ", tenKhuVuc='" + tenKhuVuc + '\'' +
                 '}';
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("maKhuVuc", maKhuVuc);
+        result.put("tenKhuVuc", tenKhuVuc);
+
+        return result;
     }
 }

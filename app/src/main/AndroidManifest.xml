@@ -21,7 +21,8 @@
         <activity android:name=".bep.BepActivity" />
         <activity android:name=".phache.PhaCheActivity" />
         <activity android:name=".quanly.QuanLyActivity" />
-        <activity android:name=".quanly.quanlynhanvien.QuanLyNhanVienActivity"></activity>
+        <activity android:name=".quanly.quanlynhanvien.QuanLyNhanVienActivity" />
+        <activity android:name=".quanly.quanlykhuvuc.QuanLyKhuVucActivity"></activity>
     </application>
 
 </manifest>
