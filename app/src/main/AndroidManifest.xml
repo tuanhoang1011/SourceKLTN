@@ -22,7 +22,10 @@
         <activity android:name=".phache.PhaCheActivity" />
         <activity android:name=".quanly.QuanLyActivity" />
         <activity android:name=".quanly.quanlynhanvien.QuanLyNhanVienActivity" />
-        <activity android:name=".quanly.quanlykhuvuc.QuanLyKhuVucActivity"></activity>
+        <activity android:name=".quanly.quanlykhuvuc.QuanLyKhuVucActivity" />
+        <activity android:name=".quanly.quanlyban.QuanLyBanActivity" />
+        <activity android:name=".quanly.quanlyban.QuanLyBanThemBan"
+            android:theme="@style/Base.Theme.AppCompat.Light.Dialog" />
     </application>
 
 </manifest>

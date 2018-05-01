@@ -1,7 +1,5 @@
 package development.mobile.quanlygoimon.code.entity;
 
-import java.util.Objects;
-
 public class Ban {
     private String maBan;
     private String maKhuVuc;
@@ -10,6 +8,13 @@ public class Ban {
     private String pushKey;
 
     public Ban() {
+    }
+
+    public Ban(String maBan, String maKhuVuc, String maHoaDon, String trangThai) {
+        this.maBan = maBan;
+        this.maKhuVuc = maKhuVuc;
+        this.maHoaDon = maHoaDon;
+        this.trangThai = trangThai;
     }
 
     public Ban(String maBan, String maKhuVuc, String maHoaDon, String trangThai, String pushKey) {
