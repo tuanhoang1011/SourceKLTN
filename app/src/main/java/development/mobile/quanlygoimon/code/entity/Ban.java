@@ -6,6 +6,7 @@ public class Ban {
     private String maHoaDon;
     private String trangThai;
     private String pushKey;
+    private String pushKeyKhuVuc;
 
     public Ban() {
     }
@@ -69,6 +70,14 @@ public class Ban {
 
     public void setPushKey(String pushKey) {
         this.pushKey = pushKey;
+    }
+
+    public String getPushKeyKhuVuc() {
+        return pushKeyKhuVuc;
+    }
+
+    public void setPushKeyKhuVuc(String pushKeyKhuVuc) {
+        this.pushKeyKhuVuc = pushKeyKhuVuc;
     }
 
     @Override

@@ -15,7 +15,7 @@
         android:layout_weight="3"
         android:gravity="fill_vertical"
         android:text="TextView"
-        android:textSize="@dimen/item_textsize_quanly_qlnv" />
+        android:textSize="@dimen/item_textsize_quanly" />
 
     <TextView
         android:id="@+id/tv_trangthai_item_quanly_qlban"
@@ -25,7 +25,7 @@
         android:layout_weight="6"
         android:gravity="center_vertical"
         android:text="TextView"
-        android:textSize="@dimen/item_textsize_quanly_qlnv" />
+        android:textSize="@dimen/item_textsize_quanly" />
 
     <ImageButton
         android:id="@+id/ibtn_xoaban_item_quanly_qlban"

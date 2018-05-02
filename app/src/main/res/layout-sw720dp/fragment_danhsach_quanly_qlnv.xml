@@ -59,7 +59,7 @@
             android:layout_weight="4"
             android:gravity="fill_vertical"
             android:text="Mã NV"
-            android:textSize="@dimen/field_textsize_quanly_qlnv"
+            android:textSize="@dimen/field_textsize_quanly"
             android:textStyle="bold" />
 
         <TextView
@@ -71,7 +71,7 @@
             android:gravity="center_vertical"
             android:text="Tên nhân viên"
             android:textStyle="bold"
-            android:textSize="@dimen/field_textsize_quanly_qlnv"/>
+            android:textSize="@dimen/field_textsize_quanly"/>
 
         <TextView
             android:id="@+id/tv_field_chucvu_item_quanly_qlnv"
@@ -82,7 +82,7 @@
             android:gravity="center_vertical"
             android:text="Chức vụ"
             android:textStyle="bold"
-            android:textSize="@dimen/field_textsize_quanly_qlnv"/>
+            android:textSize="@dimen/field_textsize_quanly"/>
 
         <TextView
             android:id="@+id/field_img_iconisdangnhap_item_quanly_qlnv"
@@ -92,7 +92,7 @@
             android:layout_weight="1"
             android:text="Online"
             android:textStyle="bold"
-            android:textSize="@dimen/field_textsize_quanly_qlnv"/>
+            android:textSize="@dimen/field_textsize_quanly"/>
 
         <TextView
             android:id="@+id/field_ibtn_xoanv_item_quanly_qlnv"
@@ -101,7 +101,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:text=""
-            android:textSize="@dimen/field_textsize_quanly_qlnv"/>
+            android:textSize="@dimen/field_textsize_quanly"/>
     </LinearLayout>
 
     <ListView

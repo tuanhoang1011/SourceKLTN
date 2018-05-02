@@ -39,6 +39,7 @@ public class QuanLyBanActivity extends AppCompatActivity {
 
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
+    private ValueEventListener listener;
 
     private List<Ban> banArrayList = null;
     private QuanLyBanDanhSachAdapter quanLyBanDanhSachAdapter = null;
@@ -112,14 +113,15 @@ public class QuanLyBanActivity extends AppCompatActivity {
         });
     }
 
-    private void getAllBanTheoKhuVuc(int position){
-        myRef.child("KhuVuc").child(khuVucArrayList.get(position).getPushkeyKV()).addListenerForSingleValueEvent(new ValueEventListener() {
+    public void getAllBanTheoKhuVuc(final int position){
+        listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 banArrayList.clear();
                 for (DataSnapshot child : dataSnapshot.child("danhSachBan").getChildren()) {
                     Ban ban = child.getValue(Ban.class);
                     ban.setPushKey(child.getKey());
+                    ban.setPushKeyKhuVuc(khuVucArrayList.get(position).getPushkeyKV());
                     banArrayList.add(ban);
                 }
                 quanLyBanDanhSachAdapter.notifyDataSetChanged();
@@ -129,7 +131,8 @@ public class QuanLyBanActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(QuanLyBanActivity.this, "Lỗi: " + databaseError, Toast.LENGTH_SHORT).show();
             }
-        });
+        };
+        myRef.child("KhuVuc").child(khuVucArrayList.get(position).getPushkeyKV()).addValueEventListener(listener);
     }
 
     @Override
@@ -147,6 +150,22 @@ public class QuanLyBanActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "Đã thêm bàn " + newBan.getMaBan() + "cho khu vực " + snKhuVuc.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
                 }
             });
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (listener != null) {
+            myRef.child("KhuVuc").child(khuVucArrayList.get(snKhuVuc.getSelectedItemPosition()).getPushkeyKV()).removeEventListener(listener);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if (listener != null) {
+            myRef.child("KhuVuc").child(khuVucArrayList.get(snKhuVuc.getSelectedItemPosition()).getPushkeyKV()).removeEventListener(listener);
         }
     }
 }

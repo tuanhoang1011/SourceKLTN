@@ -4,9 +4,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.View;
@@ -30,6 +30,7 @@ import development.mobile.quanlygoimon.code.dangnhap.LoginActivity;
 import development.mobile.quanlygoimon.code.entity.ChucNangQuanLy;
 import development.mobile.quanlygoimon.code.quanly.quanlyban.QuanLyBanActivity;
 import development.mobile.quanlygoimon.code.quanly.quanlykhuvuc.QuanLyKhuVucActivity;
+import development.mobile.quanlygoimon.code.quanly.quanlymonan.QuanLyMonAnActivity;
 import development.mobile.quanlygoimon.code.quanly.quanlynhanvien.QuanLyNhanVienActivity;
 import development.mobile.quanlygoimon.code.quanly.quanlynhomhang.QuanLyNhomHangActivity;
 
@@ -63,6 +64,7 @@ public class QuanLyActivity extends AppCompatActivity {
         chucNangQuanLyList.add(new ChucNangQuanLy(R.drawable.icon_khuvuc, "Quản lý khu vực"));
         chucNangQuanLyList.add(new ChucNangQuanLy(R.drawable.icon_ban, "Quản lý bàn"));
         chucNangQuanLyList.add(new ChucNangQuanLy(R.drawable.icon_nhomhang, "Quản lý nhóm hàng"));
+        chucNangQuanLyList.add(new ChucNangQuanLy(R.drawable.icon_monan, "Quản lý món ăn"));
 
         gridViewQuanLyAdapter = new GridViewQuanLyAdapter(this, R.layout.item_chucnang_gridview_quanly, chucNangQuanLyList);
         grdViewQuanLy.setAdapter(gridViewQuanLyAdapter);
@@ -81,6 +83,9 @@ public class QuanLyActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else if (chucNangQuanLyList.get(i).getTenChucNang().equals("Quản lý nhóm hàng")) {
                     Intent intent = new Intent(QuanLyActivity.this, QuanLyNhomHangActivity.class);
+                    startActivity(intent);
+                } else if (chucNangQuanLyList.get(i).getTenChucNang().equals("Quản lý món ăn")) {
+                    Intent intent = new Intent(QuanLyActivity.this, QuanLyMonAnActivity.class);
                     startActivity(intent);
                 }
             }
