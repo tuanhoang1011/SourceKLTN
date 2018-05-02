@@ -1,10 +1,19 @@
 package development.mobile.quanlygoimon.code.entity;
 
-public class NhomHang {
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+public class NhomHang implements Serializable{
     private int maNhomHang;
     private String tenNhomHang;
+    private String pushKey;
 
     public NhomHang() {
+    }
+
+    public NhomHang(String tenNhomHang) {
+        this.tenNhomHang = tenNhomHang;
     }
 
     public NhomHang(int maNhomHang, String tenNhomHang) {
@@ -28,11 +37,26 @@ public class NhomHang {
         this.tenNhomHang = tenNhomHang;
     }
 
+    public String getPushKey() {
+        return pushKey;
+    }
+
+    public void setPushKey(String pushKey) {
+        this.pushKey = pushKey;
+    }
+
     @Override
     public String toString() {
         return "NhomHang{" +
                 "maNhomHang=" + maNhomHang +
                 ", tenNhomHang='" + tenNhomHang + '\'' +
                 '}';
+    }
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("maNhomHang", maNhomHang);
+        result.put("tenNhomHang", tenNhomHang);
+
+        return result;
     }
 }

@@ -127,7 +127,7 @@ public class QuanLyKhuVucChiTietFragment extends Fragment {
 
                     String regexTenKV = "^[\\p{L}\\s\\d]+$";
                     if (!Pattern.matches(regexTenKV, edtTenKV.getText())) {
-                        edtTenKV.setError("Vui lòng nhập mã khu vực là chữ hoặc số và không chứa ký tự đặc biệt từ 1 ký tự trở lên");
+                        edtTenKV.setError("Vui lòng nhập tên khu vực là chữ hoặc số và không chứa ký tự đặc biệt từ 1 ký tự trở lên");
                         check = false;
                     }
 

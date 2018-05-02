@@ -31,6 +31,7 @@ import development.mobile.quanlygoimon.code.entity.ChucNangQuanLy;
 import development.mobile.quanlygoimon.code.quanly.quanlyban.QuanLyBanActivity;
 import development.mobile.quanlygoimon.code.quanly.quanlykhuvuc.QuanLyKhuVucActivity;
 import development.mobile.quanlygoimon.code.quanly.quanlynhanvien.QuanLyNhanVienActivity;
+import development.mobile.quanlygoimon.code.quanly.quanlynhomhang.QuanLyNhomHangActivity;
 
 public class QuanLyActivity extends AppCompatActivity {
 
@@ -61,6 +62,7 @@ public class QuanLyActivity extends AppCompatActivity {
         chucNangQuanLyList.add(new ChucNangQuanLy(R.drawable.icon_nhanvien, "Quản lý nhân viên"));
         chucNangQuanLyList.add(new ChucNangQuanLy(R.drawable.icon_khuvuc, "Quản lý khu vực"));
         chucNangQuanLyList.add(new ChucNangQuanLy(R.drawable.icon_ban, "Quản lý bàn"));
+        chucNangQuanLyList.add(new ChucNangQuanLy(R.drawable.icon_nhomhang, "Quản lý nhóm hàng"));
 
         gridViewQuanLyAdapter = new GridViewQuanLyAdapter(this, R.layout.item_chucnang_gridview_quanly, chucNangQuanLyList);
         grdViewQuanLy.setAdapter(gridViewQuanLyAdapter);
@@ -76,6 +78,9 @@ public class QuanLyActivity extends AppCompatActivity {
                     startActivity(intent);
                 } else if (chucNangQuanLyList.get(i).getTenChucNang().equals("Quản lý bàn")) {
                     Intent intent = new Intent(QuanLyActivity.this, QuanLyBanActivity.class);
+                    startActivity(intent);
+                } else if (chucNangQuanLyList.get(i).getTenChucNang().equals("Quản lý nhóm hàng")) {
+                    Intent intent = new Intent(QuanLyActivity.this, QuanLyNhomHangActivity.class);
                     startActivity(intent);
                 }
             }
