@@ -24,6 +24,18 @@ public class MonAn implements Serializable{
     public MonAn() {
     }
 
+    public MonAn(String tenMonAn, String loai, double gia, boolean trangThai, int maNhomHang, String urlAnh) {
+        this.maMonAn = maMonAn;
+        this.maNhomHang = maNhomHang;
+        this.tenMonAn = tenMonAn;
+        this.gia = gia;
+        this.loai = loai;
+        this.trangThai = trangThai;
+        this.soLuong = soLuong;
+        this.ghiChu = ghiChu;
+        this.pushKey = pushKey;
+    }
+
     public MonAn(int maMonAn, String tenMonAn, String loai, double gia, boolean trangThai, int maNhomHang, String urlAnh) {
         this.maMonAn = maMonAn;
         this.maNhomHang = maNhomHang;

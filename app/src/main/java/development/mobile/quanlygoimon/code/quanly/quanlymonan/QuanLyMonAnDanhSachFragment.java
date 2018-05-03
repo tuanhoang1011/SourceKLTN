@@ -66,8 +66,8 @@ public class QuanLyMonAnDanhSachFragment extends Fragment {
 
         tenNhomHangArrayList = new ArrayList<>();
         nhomHangArrayList = new ArrayList<>();
-        tenNhomHangArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, tenNhomHangArrayList);
-        tenNhomHangArrayAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+        tenNhomHangArrayAdapter = new ArrayAdapter<String>(getActivity(), R.layout.item_dropdown_spinner_khuvuc_thungan, tenNhomHangArrayList);
+        tenNhomHangArrayAdapter.setDropDownViewResource(R.layout.item_spinner_khuvuc_thungan);
         snNhomHang.setAdapter(tenNhomHangArrayAdapter);
 
         edtSearch = (EditText) view.findViewById(R.id.edi_searchmonan_quanly_qlma);
@@ -84,6 +84,7 @@ public class QuanLyMonAnDanhSachFragment extends Fragment {
                 QuanLyMonAnChiTietFragment quanLyMonAnChiTietFragment = new QuanLyMonAnChiTietFragment();
 
                 bundle.putSerializable("ma", monAn);
+
                 quanLyMonAnChiTietFragment.setArguments(bundle);
                 ft_receive.replace(R.id.frame_layout_holder_chitiet_quanly_qlma, quanLyMonAnChiTietFragment);
                 ft_receive.commit();
@@ -101,6 +102,7 @@ public class QuanLyMonAnDanhSachFragment extends Fragment {
                 Bundle bundle = new Bundle();
 
                 bundle.putString("btnThemMA", "btnThemMA");
+                bundle.putString("pushkeynhomhang", nhomHangArrayList.get(snNhomHang.getSelectedItemPosition()).getPushKey());
                 quanLyMonAnChiTietFragment.setArguments(bundle);
 
                 ft_receive.replace(R.id.frame_layout_holder_chitiet_quanly_qlma, quanLyMonAnChiTietFragment);

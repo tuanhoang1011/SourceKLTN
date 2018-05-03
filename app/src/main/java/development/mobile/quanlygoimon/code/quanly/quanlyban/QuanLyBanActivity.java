@@ -168,5 +168,7 @@ public class QuanLyBanActivity extends AppCompatActivity {
         if (listener != null) {
             myRef.child("KhuVuc").child(khuVucArrayList.get(snKhuVuc.getSelectedItemPosition()).getPushkeyKV()).removeEventListener(listener);
         }
+
+        finish();
     }
 }

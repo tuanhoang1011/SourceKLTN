@@ -243,7 +243,7 @@ public class QuanLyNhanVienChiTietFragment extends Fragment {
         edtDiaChi.setText(nv.getDiaChi().toString());
         edtSDT.setText(nv.getSoDienThoai().toString());
 
-        for (int i = 0; i < chucVuDBLst.size() - 1; i++) {
+        for (int i = 0; i < chucVuDBLst.size(); i++) {
             if (nv.getChucVu().equals(chucVuDBLst.get(i))) {
                 spnChucVu.setSelection(i);
                 break;

@@ -39,7 +39,7 @@
         android:orientation="horizontal">
         <fragment
             android:id="@+id/lst_fm_bep_taiban_dangcho"
-            android:name="development.mobile.quanlygoimon.code.bep.TaiBanDangChoFragment"
+            android:name="development.mobile.quanlygoimon.code.bep.taiban.TaiBanDangChoFragment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -47,7 +47,7 @@
 
         <fragment
             android:id="@+id/lst_fm_bep_taiban_dangchebien"
-            android:name="development.mobile.quanlygoimon.code.bep.TaiBanDangCheBienFragment"
+            android:name="development.mobile.quanlygoimon.code.bep.taiban.TaiBanDangCheBienFragment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

@@ -4,6 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import development.mobile.quanlygoimon.code.bep.dattruoc.DatTruocFragment;
+import development.mobile.quanlygoimon.code.bep.taiban.TaiBanFragment;
+
 public class PagerAdapterBep extends FragmentPagerAdapter {
     public PagerAdapterBep(FragmentManager fm) {
         super(fm);

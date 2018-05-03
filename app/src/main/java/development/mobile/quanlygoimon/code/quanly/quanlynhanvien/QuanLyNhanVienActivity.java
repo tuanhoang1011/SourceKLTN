@@ -14,4 +14,10 @@ public class QuanLyNhanVienActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quan_ly_nhan_vien);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

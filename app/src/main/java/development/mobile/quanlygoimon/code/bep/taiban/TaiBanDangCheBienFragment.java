@@ -1,4 +1,4 @@
-package development.mobile.quanlygoimon.code.bep;
+package development.mobile.quanlygoimon.code.bep.taiban;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,26 +20,26 @@ import java.util.List;
 import development.mobile.quanlygoimon.code.R;
 import development.mobile.quanlygoimon.code.entity.ChiTietHoaDon;
 
-public class TaiBanDangChoFragment extends Fragment{
+public class TaiBanDangCheBienFragment extends Fragment {
 
     private List<ChiTietHoaDon> chiTietHoaDonArrayList = null;
-    private BepTaiBanDangChoAdapter bepTaiBanDangChoAdapter = null;
+    private BepTaiBanDangCheBienAdapter bepTaiBanDangCheBienAdapter = null;
     private ListView lvCTHD;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference myRef = database.getReference();
     private ValueEventListener listener;
 
-    public TaiBanDangChoFragment() {
+    public TaiBanDangCheBienFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_bep_taiban_dangcho, container, false);
-        lvCTHD  = (ListView) view.findViewById(R.id.lv_cthd_taiban_dangcho);
+        View view = inflater.inflate(R.layout.fragment_bep_taiban_dangchebien, container, false);
+        lvCTHD  = (ListView) view.findViewById(R.id.lv_cthd_taiban_dangchebien);
         chiTietHoaDonArrayList = new ArrayList<ChiTietHoaDon>();
-        bepTaiBanDangChoAdapter = new BepTaiBanDangChoAdapter(getActivity(), R.layout.item_list_fm_bep_taiban_dangcho, chiTietHoaDonArrayList);
-        lvCTHD.setAdapter(bepTaiBanDangChoAdapter);
+        bepTaiBanDangCheBienAdapter = new BepTaiBanDangCheBienAdapter(getActivity(), R.layout.item_list_fm_bep_taiban_dangchebien, chiTietHoaDonArrayList);
+        lvCTHD.setAdapter(bepTaiBanDangCheBienAdapter);
         getAllHD();
 
         return view;
@@ -53,7 +53,7 @@ public class TaiBanDangChoFragment extends Fragment{
                 for (DataSnapshot child : dataSnapshot.getChildren()) {
                     for(DataSnapshot childOfChild : child.child("chiTietHoaDon").getChildren()){
                         if (childOfChild.child("loai").getValue(String.class).equals("Bếp")
-                                && childOfChild.child("trangThai").getValue(String.class).equals("Đang chờ")) {
+                                && childOfChild.child("trangThai").getValue(String.class).equals("Đang chế biến")) {
                             ChiTietHoaDon cthd = childOfChild.getValue(ChiTietHoaDon.class);
                             cthd.setMaHoaDon(child.child("maHoaDon").getValue(String.class));
                             cthd.setPushkeyHD(child.getKey());
@@ -62,7 +62,7 @@ public class TaiBanDangChoFragment extends Fragment{
                         }
                     }
                 }
-                bepTaiBanDangChoAdapter.notifyDataSetChanged();
+                bepTaiBanDangCheBienAdapter.notifyDataSetChanged();
             }
 
             @Override

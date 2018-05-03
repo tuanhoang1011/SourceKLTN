@@ -6,187 +6,216 @@
     android:layout_gravity="center"
     android:orientation="vertical">
 
-
-    <TextView
-        android:id="@+id/tv_title_chitiet_quanly_qlma"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="TextView"
-        android:textSize="24sp" />
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/img_anhmonan_chitiet_quanly_qlma"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        app:srcCompat="@drawable/icon_nhomhang" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_title_chitiet_quanly_qlma"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="TextView"
+                android:textSize="@dimen/item_textsize_quanly" />
 
-        <TextView
-            android:id="@+id/tv_field_mama_chitiet_quanly_qlma"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="fill_vertical"
-            android:text="Mã món ăn" />
+            <ImageView
+                android:id="@+id/img_anhmonan_chitiet_quanly_qlma"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/icon_nhomhang" />
 
-        <EditText
-            android:id="@+id/edt_mama_chitiet_quanly_qlma"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="3"
-            android:ems="10"
-            android:gravity="fill_vertical"
-            android:inputType="textPersonName" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_field_mama_chitiet_quanly_qlma"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="fill_vertical"
+                    android:text="Mã món ăn"
+                    android:textSize="@dimen/item_textsize_quanly" />
 
-        <TextView
-            android:id="@+id/tv_field_tenma_chitiet_quanly_qlma"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="fill_vertical"
-            android:text="Tên món ăn" />
+                <EditText
+                    android:id="@+id/edt_mama_chitiet_quanly_qlma"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:ems="10"
+                    android:gravity="fill_vertical"
+                    android:inputType="textPersonName"
+                    android:textSize="@dimen/item_textsize_quanly" />
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/edt_tenma_chitiet_quanly_qlma"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="3"
-            android:ems="10"
-            android:gravity="center_vertical"
-            android:inputType="textPersonName" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_field_tenma_chitiet_quanly_qlma"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="fill_vertical"
+                    android:text="Tên món ăn"
+                    android:textSize="@dimen/item_textsize_quanly" />
 
-        <TextView
-            android:id="@+id/tv_field_loai_chitiet_quanly_qlma"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="Loại" />
+                <EditText
+                    android:id="@+id/edt_tenma_chitiet_quanly_qlma"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:ems="10"
+                    android:gravity="center_vertical"
+                    android:inputType="textPersonName"
+                    android:textSize="@dimen/item_textsize_quanly" />
+            </LinearLayout>
 
-        <Spinner
-            android:id="@+id/sn_loai_chitiet_quanly_qlma"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:ems="10"
-            android:gravity="center_vertical" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_field_loai_chitiet_quanly_qlma"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Loại"
+                    android:textSize="@dimen/item_textsize_quanly" />
 
-        <TextView
-            android:id="@+id/tv_field_gia_chitiet_quanly_qlma"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="Giá" />
+                <Spinner
+                    android:id="@+id/sn_loai_chitiet_quanly_qlma"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:ems="10"
+                    android:gravity="center_vertical" />
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/edt_gia_chitiet_quanly_qlma"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="3"
-            android:ems="10"
-            android:gravity="center_vertical"
-            android:inputType="textMultiLine" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_field_gia_chitiet_quanly_qlma"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Giá"
+                    android:textSize="@dimen/item_textsize_quanly" />
 
-        <TextView
-            android:id="@+id/tv_field_trangthai_chitiet_quanly_qlma"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="Trạng thái" />
+                <EditText
+                    android:id="@+id/edt_gia_chitiet_quanly_qlma"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:ems="10"
+                    android:gravity="center_vertical"
+                    android:inputType="textMultiLine"
+                    android:textSize="@dimen/item_textsize_quanly" />
+            </LinearLayout>
 
-        <CheckBox
-            android:id="@+id/ck_trangthai_chitiet_quanly_qlma"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:text="Có phục vụ" />
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tv_field_trangthai_chitiet_quanly_qlma"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Trạng thái"
+                    android:textSize="@dimen/item_textsize_quanly" />
 
-        <TextView
-            android:id="@+id/tv_field_manhomhang_chitiet_quanly_qlma"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="Mã nhóm hàng" />
+                <CheckBox
+                    android:id="@+id/ck_trangthai_chitiet_quanly_qlma"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Có phục vụ"
+                    android:textSize="@dimen/item_textsize_quanly" />
+            </LinearLayout>
 
-        <Spinner
-            android:id="@+id/spn_manhomhang_chitiet_quanly_qlma"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:ems="10"
-            android:gravity="center_vertical" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_field_manhomhang_chitiet_quanly_qlma"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Tên nhóm hàng"
+                    android:textSize="@dimen/item_textsize_quanly" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/spn_manhomhang_chitiet_quanly_qlma"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:ems="10"
+                    android:gravity="center_vertical" />
 
-        <Button
-            android:id="@+id/btn_sua_chitiet_quanly_qlma"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Sửa" />
+            </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_luu_chitiet_quanly_qlma"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Lưu" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
-    </LinearLayout>
+                <Button
+                    android:id="@+id/btn_sua_chitiet_quanly_qlma"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Sửa"
+                    android:textSize="@dimen/item_textsize_quanly" />
 
+                <Button
+                    android:id="@+id/btn_luu_chitiet_quanly_qlma"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Lưu"
+                    android:textSize="@dimen/item_textsize_quanly" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/progressBar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:visibility="invisible"/>
 </LinearLayout>
