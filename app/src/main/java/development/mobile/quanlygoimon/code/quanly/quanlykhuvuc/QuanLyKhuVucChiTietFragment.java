@@ -123,23 +123,42 @@ public class QuanLyKhuVucChiTietFragment extends Fragment {
                         suaThongTinKhuVuc(updateKV);
                     }
                 } else if (tvTitle.getText().equals("Thêm mới khu vực")) {
-                    boolean check = true;
 
-                    String regexTenKV = "^[\\p{L}\\s\\d]+$";
-                    if (!Pattern.matches(regexTenKV, edtTenKV.getText())) {
-                        edtTenKV.setError("Vui lòng nhập tên khu vực là chữ hoặc số và không chứa ký tự đặc biệt từ 1 ký tự trở lên");
-                        check = false;
-                    }
+                    myRef.child("KhuVuc").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            boolean check = true;
 
-                    if (check) {
-                        setFocusEditText(false);
-                        btnSua.setEnabled(true);
-                        btnSua.setText("Thêm");
-                        KhuVuc newKV = new KhuVuc(edtTenKV.getText().toString().trim());
+                            for (DataSnapshot child : dataSnapshot.getChildren()) {
+                                if (child.child("tenKhuVuc").getValue(String.class).equalsIgnoreCase( edtTenKV.getText().toString())) {
+                                    edtTenKV.setError("Tên khu vực trùng. Vui lòng nhập lại");
+                                    check = false;
+                                    break;
+                                }
+                            }
 
-                        themKhuVuc(newKV);
-                        clearDataInputKV();
-                    }
+                            String regexTenKV = "^[\\p{L}\\s\\d]+$";
+                            if (!Pattern.matches(regexTenKV, edtTenKV.getText())) {
+                                edtTenKV.setError("Vui lòng nhập tên khu vực là chữ hoặc số và không chứa ký tự đặc biệt từ 1 ký tự trở lên");
+                                check = false;
+                            }
+
+                            if (check) {
+                                setFocusEditText(false);
+                                btnSua.setEnabled(true);
+                                btnSua.setText("Thêm");
+                                KhuVuc newKV = new KhuVuc(edtTenKV.getText().toString().trim());
+
+                                themKhuVuc(newKV);
+                                clearDataInputKV();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
                 }
             }
         });

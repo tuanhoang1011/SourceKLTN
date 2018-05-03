@@ -7,16 +7,17 @@ public class Ban {
     private String trangThai;
     private String pushKey;
     private String pushKeyKhuVuc;
+    private String maDatTruoc;
 
     public Ban() {
     }
 
-    public Ban(String maBan, String maKhuVuc, String maHoaDon, String trangThai) {
-        this.maBan = maBan;
-        this.maKhuVuc = maKhuVuc;
-        this.maHoaDon = maHoaDon;
-        this.trangThai = trangThai;
-    }
+//    public Ban(String maBan, String maKhuVuc, String maHoaDon, String trangThai) {
+//        this.maBan = maBan;
+//        this.maKhuVuc = maKhuVuc;
+//        this.maHoaDon = maHoaDon;
+//        this.trangThai = trangThai;
+//    }
 
     public Ban(String maBan, String maKhuVuc, String maHoaDon, String trangThai, String pushKey) {
         this.maBan = maBan;
@@ -26,10 +27,11 @@ public class Ban {
         this.pushKey = pushKey;
     }
 
-    public Ban(String maBan, String maHoaDon, String trangThai) {
+    public Ban(String maBan, String maDatTruoc, String maHoaDon, String trangThai) {
         this.maBan = maBan;
         this.maHoaDon = maHoaDon;
         this.trangThai = trangThai;
+        this.maDatTruoc = maDatTruoc;
     }
 
     public String getMaBan() {
@@ -78,6 +80,14 @@ public class Ban {
 
     public void setPushKeyKhuVuc(String pushKeyKhuVuc) {
         this.pushKeyKhuVuc = pushKeyKhuVuc;
+    }
+
+    public String getMaDatTruoc() {
+        return maDatTruoc;
+    }
+
+    public void setMaDatTruoc(String maDatTruoc) {
+        this.maDatTruoc = maDatTruoc;
     }
 
     @Override

@@ -86,6 +86,7 @@ public class QuanLyBanActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(QuanLyBanActivity.this, QuanLyBanThemBan.class);
                 intent.putExtra("tang", snKhuVuc.getSelectedItem().toString());
+                intent.putExtra("pushkeykv", khuVucArrayList.get(snKhuVuc.getSelectedItemPosition()).getPushkeyKV());
 
                 startActivityForResult(intent, REQUEST_CODE);
             }

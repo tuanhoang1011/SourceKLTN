@@ -83,6 +83,8 @@ public class QuanLyMonAnChiTietFragment extends Fragment {
         tenNhomHangArrayAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
         snMaNhomHang.setAdapter(tenNhomHangArrayAdapter);
 
+        getAllNhomHang();
+
         edtMaMA.setEnabled(false);
         setFocusEditText(false);
         alertErrorDataInput();
