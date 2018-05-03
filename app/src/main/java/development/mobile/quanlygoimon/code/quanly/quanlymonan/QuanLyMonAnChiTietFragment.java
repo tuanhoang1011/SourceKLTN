@@ -1,7 +1,9 @@
 package development.mobile.quanlygoimon.code.quanly.quanlymonan;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -39,10 +41,12 @@ import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import development.mobile.quanlygoimon.code.R;
@@ -50,7 +54,7 @@ import development.mobile.quanlygoimon.code.entity.MonAn;
 import development.mobile.quanlygoimon.code.entity.NhomHang;
 import development.mobile.quanlygoimon.code.quanly.quanlymonan.utility.FilePaths;
 
-public class QuanLyMonAnChiTietFragment extends Fragment implements ChangePhotoDialog.OnPhotoReceivedListener{
+public class QuanLyMonAnChiTietFragment extends Fragment{
 
     private Button btnLuu, btnSua;
     private EditText edtMaMA, edtTenMA, edtGia;
@@ -80,7 +84,8 @@ public class QuanLyMonAnChiTietFragment extends Fragment implements ChangePhotoD
 
 
 
-    private static final int REQUEST_CODE = 1234;
+    public static final int REQUEST_CODE_CTMA = 1111;
+    public static final int RESPONSE_CODE_CTMA = 2222;
     private static final double MB_THRESHHOLD = 5.0;
     private static final double MB = 1000000.0;
 
@@ -179,7 +184,7 @@ public class QuanLyMonAnChiTietFragment extends Fragment implements ChangePhotoD
                         check = false;
                     }
 
-                    String regexGia = "^\\d$";
+                    String regexGia = "^\\d+$";
                     if (!Pattern.matches(regexGia, edtGia.getText())) {
                         edtGia.setError("Vui lòng nhập đúng định dạng số");
                         check = false;
@@ -247,8 +252,8 @@ public class QuanLyMonAnChiTietFragment extends Fragment implements ChangePhotoD
             @Override
             public void onClick(View view) {
                 if(mStoragePermissions){
-                    ChangePhotoDialog dialog = new ChangePhotoDialog();
-                    dialog.show(getFragmentManager(), "Thay đổi ảnh món ăn");
+                    Intent intent = new Intent(getActivity(), ThayDoiAnhMonAnActivity.class);
+                    startActivityForResult(intent, REQUEST_CODE_CTMA);
                 }else{
                     verifyStoragePermissions();
                 }
@@ -284,6 +289,12 @@ public class QuanLyMonAnChiTietFragment extends Fragment implements ChangePhotoD
                 break;
             }
         }
+
+        if (ma.getUrlAnh() != null) {
+            ImageLoader imageLoader = ImageLoader.getInstance();
+            imageLoader.init(ImageLoaderConfiguration.createDefault(getContext()));
+            imageLoader.displayImage(ma.getUrlAnh().toString(), imgMonAn);
+        }
     }
 
     private void themMonAn(final MonAn newMA){
@@ -305,11 +316,11 @@ public class QuanLyMonAnChiTietFragment extends Fragment implements ChangePhotoD
                 myRef.child("NhomHang").child(pushkeynhomhang).child("danhSachMonAn").push().setValue(newMA).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if(mSelectedImageUri != null){
-                            uploadNewPhoto(mSelectedImageUri);
-                        }else if(mSelectedImageBitmap  != null){
-                            uploadNewPhoto(mSelectedImageBitmap);
-                        }
+//                        if(mSelectedImageUri != null){
+//                            uploadNewPhoto(mSelectedImageUri);
+//                        }else if(mSelectedImageBitmap  != null){
+//                            uploadNewPhoto(mSelectedImageBitmap);
+//                        }
 
                         Toast.makeText(getActivity(), "Đã thêm món ăn " + newMA.getTenMonAn(), Toast.LENGTH_LONG).show();
                     }
@@ -323,12 +334,46 @@ public class QuanLyMonAnChiTietFragment extends Fragment implements ChangePhotoD
         });
     }
 
-    private void suaThongTinMonAn(MonAn updateMA){
-//        updateMA.setMaMonAn(ma.getMaMonAn());
-//        Map<String, Object> maMapValues = updateMA.toMap();
-//
-//        myRef.child("MonAn").child(pushkeyMAHienTai).updateChildren(maMapValues);
-//        Toast.makeText(getActivity(), "Đã cập nhật thông tin món ăn " + updateMA.getMaMonAn(), Toast.LENGTH_LONG).show();
+    private void suaThongTinMonAn(final MonAn updateMA){
+        updateMA.setMaMonAn(ma.getMaMonAn());
+        Map<String, Object> maMapValues = updateMA.toMap();
+
+        if (ma.getMaNhomHang() != nhomHangArrayList.get(snMaNhomHang.getSelectedItemPosition()).getMaNhomHang()) {
+            myRef.child("NhomHang").child(ma.getPushKeyNhomHang())
+                    .child("danhSachMonAn").child(ma.getPushKey()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Map<String, Object> maMapValues = updateMA.toMap();
+
+                    myRef.child("NhomHang").child(nhomHangArrayList.get(snMaNhomHang.getSelectedItemPosition()).getPushKey()).child("danhSachMonAn").child(ma.getPushKey()).updateChildren(maMapValues).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+//                            if(mSelectedImageUri != null){
+//                                uploadNewPhoto(mSelectedImageUri);
+//                            }else if(mSelectedImageBitmap  != null){
+//                                uploadNewPhoto(mSelectedImageBitmap);
+//                            }
+
+                            Toast.makeText(getActivity(), "Đã cập nhật món ăn " + updateMA.getTenMonAn(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            });
+        } else {
+            myRef.child("NhomHang").child(nhomHangArrayList.get(snMaNhomHang.getSelectedItemPosition()).getPushKey()).child("danhSachMonAn").child(ma.getPushKey()).updateChildren(maMapValues).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+//                    if(mSelectedImageUri != null){
+//                        uploadNewPhoto(mSelectedImageUri);
+//                    }else if(mSelectedImageBitmap  != null){
+//                        uploadNewPhoto(mSelectedImageBitmap);
+//                    }
+
+                    Toast.makeText(getActivity(), "Đã cập nhật món ăn " + updateMA.getTenMonAn(), Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
     }
 
     private void getAllNhomHang(){
@@ -404,6 +449,8 @@ public class QuanLyMonAnChiTietFragment extends Fragment implements ChangePhotoD
         ckTrangThai.setEnabled(b);
         btnSua.setEnabled(b);
         btnLuu.setEnabled(b);
+
+        imgMonAn.setEnabled(b);
     }
 
     private void clearAlertErrorDataInput() {
@@ -435,29 +482,8 @@ public class QuanLyMonAnChiTietFragment extends Fragment implements ChangePhotoD
             ActivityCompat.requestPermissions(
                     getActivity(),
                     permissions,
-                    REQUEST_CODE
+                    REQUEST_CODE_CTMA
             );
-        }
-    }
-
-    @Override
-    public void getImagePath(Uri imagePath) {
-        if( !imagePath.toString().equals("")){
-            mSelectedImageBitmap = null;
-            mSelectedImageUri = imagePath;
-            Log.d("", "getImagePath: got the image uri: " + mSelectedImageUri);
-            ImageLoader.getInstance().displayImage(imagePath.toString(), imgMonAn);
-        }
-
-    }
-
-    @Override
-    public void getImageBitmap(Bitmap bitmap) {
-        if(bitmap != null){
-            mSelectedImageUri = null;
-            mSelectedImageBitmap = bitmap;
-            Log.d("", "getImageBitmap: got the image bitmap: " + mSelectedImageBitmap);
-            imgMonAn.setImageBitmap(bitmap);
         }
     }
 
@@ -559,7 +585,6 @@ public class QuanLyMonAnChiTietFragment extends Fragment implements ChangePhotoD
             StorageMetadata metadata = new StorageMetadata.Builder()
                     .setContentType("image/jpg")
                     .setContentLanguage("en")
-//                    .setCustomMetadata("Mitch's special meta data", "JK nothing special here")
                     .setCustomMetadata("location", "VietNam")
                     .build();
             UploadTask uploadTask = null;
@@ -600,6 +625,27 @@ public class QuanLyMonAnChiTietFragment extends Fragment implements ChangePhotoD
             ;
         }else{
             Toast.makeText(getContext(), "Image is too Large", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == ThayDoiAnhMonAnActivity.PICKFILE_REQUEST_CODE) {
+            Uri imageUri = data.getParcelableExtra("uriImageSelected");
+
+            ImageLoader imageLoader = ImageLoader.getInstance();
+            imageLoader.init(ImageLoaderConfiguration.createDefault(getContext()));
+            imageLoader.displayImage(imageUri.toString(), imgMonAn);
+
+            uploadNewPhoto(imageUri);
+
+        } else if (resultCode == ThayDoiAnhMonAnActivity.CAMERA_REQUEST_CODE) {
+            Bundle bundle = data.getBundleExtra("datacamera");
+            byte[] imageTook = bundle.getByteArray("bitmapTook");
+            Bitmap bitmap = BitmapFactory.decodeByteArray(imageTook, 0, imageTook.length);
+            imgMonAn.setImageBitmap(bitmap);
+            uploadNewPhoto(bitmap);
         }
     }
 }

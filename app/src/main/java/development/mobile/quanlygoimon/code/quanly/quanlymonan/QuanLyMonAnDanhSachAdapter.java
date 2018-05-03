@@ -75,7 +75,7 @@ public class QuanLyMonAnDanhSachAdapter extends ArrayAdapter<MonAn> {
                             if (ma.isTrangThai()) {
                                 AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
                                 alertDialog.setTitle("Thông báo");
-                                alertDialog.setMessage("Món ăn có trạng thái trưe. Không thể xóa");
+                                alertDialog.setMessage("Món ăn có trạng thái Có phục vụ. Không thể xóa");
                                 alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
                                 alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                                         new DialogInterface.OnClickListener() {
@@ -85,10 +85,10 @@ public class QuanLyMonAnDanhSachAdapter extends ArrayAdapter<MonAn> {
                                         });
                                 alertDialog.show();
                             } else {
-                                myRef.child("NhomHang").child("danhSachMonAn").child(ma.getPushKey()).removeValue(new DatabaseReference.CompletionListener() {
+                                myRef.child("NhomHang").child(ma.getPushKeyNhomHang()).child("danhSachMonAn").child(ma.getPushKey()).removeValue(new DatabaseReference.CompletionListener() {
                                     @Override
                                     public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                                        Toast.makeText(getContext(), "Đã xóa món ăn " + ma.getMaMonAn(), Toast.LENGTH_LONG).show();
+                                        Toast.makeText(getContext(), "Đã xóa món ăn " + ma.getTenMonAn(), Toast.LENGTH_LONG).show();
                                     }
                                 });
                             }

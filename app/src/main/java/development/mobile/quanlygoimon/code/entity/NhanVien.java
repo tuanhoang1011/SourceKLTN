@@ -15,8 +15,19 @@ public class NhanVien implements Serializable{
     private String chucVu;
     private boolean dangNhap;
     private String pushkeyNV;
+    private String matKhau;
 
     public NhanVien() {
+    }
+
+    public NhanVien(int maNhanVien, String tenNhanVien, String ngaySinh, String diaChi, String soDienThoai, String chucVu, boolean dangNhap, String matKhau) {
+        this.maNhanVien = maNhanVien;
+        this.tenNhanVien = tenNhanVien;
+        this.ngaySinh = ngaySinh;
+        this.diaChi = diaChi;
+        this.soDienThoai = soDienThoai;
+        this.chucVu = chucVu;
+        this.matKhau = matKhau;
     }
 
     public NhanVien(int maNhanVien, String tenNhanVien, String ngaySinh, String diaChi, String soDienThoai, String chucVu, boolean dangNhap) {
@@ -85,6 +96,14 @@ public class NhanVien implements Serializable{
         this.dangNhap = dangNhap;
     }
 
+    public String getMatKhau() {
+        return matKhau;
+    }
+
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
+    }
+
     public String getPushkeyNV() {
         return pushkeyNV;
     }
@@ -116,6 +135,21 @@ public class NhanVien implements Serializable{
         result.put("soDienThoai", soDienThoai);
         result.put("chucVu", chucVu);
         result.put("dangNhap", dangNhap);
+
+        return result;
+    }
+
+    @Exclude
+    public Map<String, Object> toMapQuanLy() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("maNhanVien", maNhanVien);
+        result.put("tenNhanVien", tenNhanVien);
+        result.put("ngaySinh", ngaySinh);
+        result.put("diaChi", diaChi);
+        result.put("soDienThoai", soDienThoai);
+        result.put("chucVu", chucVu);
+        result.put("dangNhap", dangNhap);
+        result.put("matKhau", matKhau);
 
         return result;
     }

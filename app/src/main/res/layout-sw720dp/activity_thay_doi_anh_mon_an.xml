@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="500sp"
+    android:layout_height="200sp"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="10sp"
+    tools:context=".quanly.quanlymonan.ThayDoiAnhMonAnActivity">
+
+
+    <TextView
+        android:id="@+id/dialogChoosePhoto_ThayDoiAnhMonAn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Chọn từ bộ nhớ"
+        android:textSize="32sp" />
+
+
+    <TextView
+        android:id="@+id/dialogOpenCamera_ThayDoiAnhMonAn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Chụp ảnh"
+        android:textSize="32sp" />
+
+</LinearLayout>

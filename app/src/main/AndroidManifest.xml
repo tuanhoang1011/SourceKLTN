@@ -29,11 +29,13 @@
         <activity android:name=".quanly.quanlynhanvien.QuanLyNhanVienActivity" />
         <activity android:name=".quanly.quanlykhuvuc.QuanLyKhuVucActivity" />
         <activity android:name=".quanly.quanlyban.QuanLyBanActivity" />
-        <activity
-            android:name=".quanly.quanlyban.QuanLyBanThemBan"
+        <activity android:name=".quanly.quanlyban.QuanLyBanThemBan"
             android:theme="@style/Base.Theme.AppCompat.Light.Dialog" />
         <activity android:name=".quanly.quanlynhomhang.QuanLyNhomHangActivity" />
-        <activity android:name=".quanly.quanlymonan.QuanLyMonAnActivity"></activity>
+        <activity android:name=".quanly.quanlymonan.QuanLyMonAnActivity" />
+        <activity android:name=".quanly.quanlymonan.ThayDoiAnhMonAnActivity"
+            android:theme="@style/Base.Theme.AppCompat.Light.Dialog" >
+        </activity>
     </application>
 
 </manifest>

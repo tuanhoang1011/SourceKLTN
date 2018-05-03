@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -32,7 +34,7 @@ import development.mobile.quanlygoimon.code.entity.NhanVien;
 public class QuanLyNhanVienChiTietFragment extends Fragment {
 
     private Button btnLuu, btnSua;
-    private EditText edtMaNV, edtTenNV, edtNgaySinh, edtDiaChi, edtSDT;
+    private EditText edtMaNV, edtTenNV, edtNgaySinh, edtDiaChi, edtSDT, edtMatKhau;
     private Spinner spnChucVu;
     private TextView tvTitle;
 
@@ -60,6 +62,7 @@ public class QuanLyNhanVienChiTietFragment extends Fragment {
         edtDiaChi = (EditText) view.findViewById(R.id.edt_diachi_chitiet_quanly_qlnv);
         edtSDT = (EditText) view.findViewById(R.id.edt_sdt_chitiet_quanly_qlnv);
         spnChucVu = (Spinner) view.findViewById(R.id.spn_chucvu_chitiet_quanly_qlnv);
+        edtMatKhau = (EditText) view.findViewById(R.id.edt_matkhauql_chitiet_quanly_qlnv);
         btnLuu = (Button) view.findViewById(R.id.btn_luu_chitiet_quanly_qlnv);
         btnSua = (Button) view.findViewById(R.id.btn_sua_chitiet_quanly_qlnv);
 
@@ -77,8 +80,8 @@ public class QuanLyNhanVienChiTietFragment extends Fragment {
 
 
         ArrayAdapter<String> chucVuArrayAdapter =
-                new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, chucVuLst);
-        chucVuArrayAdapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
+                new ArrayAdapter<>(getContext(), R.layout.dropdown_item_spinner_quanly, chucVuLst);
+        chucVuArrayAdapter.setDropDownViewResource(R.layout.item_spinner_quanly);
         spnChucVu.setAdapter(chucVuArrayAdapter);
 
         edtMaNV.setEnabled(false);
@@ -101,6 +104,24 @@ public class QuanLyNhanVienChiTietFragment extends Fragment {
             }
         }
 
+        spnChucVu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (btnSua.getText().equals("Hủy")) {
+                    if (spnChucVu.getSelectedItem().toString().equals("Quản lý")) {
+                        edtMatKhau.setEnabled(true);
+                    } else {
+                        edtMatKhau.setEnabled(false);
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         btnSua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,22 +129,32 @@ public class QuanLyNhanVienChiTietFragment extends Fragment {
                     setFocusEditText(true);
                     edtMaNV.setEnabled(false);
                     btnSua.setText("Hủy");
+
+                    if (nv.getChucVu().equals("QuanLy")) {
+                        edtMatKhau.setEnabled(true);
+                    } else {
+                        edtMatKhau.setEnabled(false);
+                    }
                 } else if (btnSua.getText().toString().equals("Thêm")) {
                     setFocusEditText(true);
+                    if (spnChucVu.getSelectedItem().toString().equals("Quản lý")) {
+                        edtMatKhau.setEnabled(true);
+                    } else {
+                        edtMatKhau.setEnabled(false);
+                    }
                     clearDataInputNV();
                     btnSua.setText("Hủy");
                 } else if (btnSua.getText().toString().equals("Hủy")) {
                     if (tvTitle.getText().equals("Chi tiết nhân viên")) {
-                        setFocusEditText(false);
-                        btnSua.setEnabled(true);
                         btnSua.setText("Sửa");
                         loadNV(nv);
                     } else if (tvTitle.getText().equals("Thêm mới nhân viên")) {
-                        setFocusEditText(false);
                         btnSua.setText("Thêm");
-                        btnSua.setEnabled(true);
+
                         clearDataInputNV();
                     }
+                    setFocusEditText(false);
+                    btnSua.setEnabled(true);
                     clearAlertErrorDataInput();
                 }
             }
@@ -162,10 +193,25 @@ public class QuanLyNhanVienChiTietFragment extends Fragment {
                         setFocusEditText(false);
                         btnSua.setEnabled(true);
                         btnSua.setText("Sửa");
-                        NhanVien updateNV = new NhanVien(nv.getMaNhanVien(), edtTenNV.getText().toString(),
-                                edtNgaySinh.getText().toString(), edtDiaChi.getText().toString(),
-                                edtSDT.getText().toString(), chucVuDBLst.get(spnChucVu.getSelectedItemPosition()), nv.isDangNhap());
-                        suaThongTinNhanVien(updateNV);
+
+                        if (spnChucVu.getSelectedItem().toString().equals("Quản lý")) {
+                            String mk = "";
+                            if (edtMatKhau.getText().toString().equals("")) {
+                                mk = nv.getMatKhau();
+                            } else {
+                                mk = edtMatKhau.getText().toString();
+                            }
+
+                            NhanVien updateNV = new NhanVien(nv.getMaNhanVien(), edtTenNV.getText().toString(),
+                                    edtNgaySinh.getText().toString(), edtDiaChi.getText().toString(),
+                                    edtSDT.getText().toString(), chucVuDBLst.get(spnChucVu.getSelectedItemPosition()), nv.isDangNhap(), mk);
+                            suaThongTinNhanVien(updateNV);
+                        } else {
+                            NhanVien updateNV = new NhanVien(nv.getMaNhanVien(), edtTenNV.getText().toString(),
+                                    edtNgaySinh.getText().toString(), edtDiaChi.getText().toString(),
+                                    edtSDT.getText().toString(), chucVuDBLst.get(spnChucVu.getSelectedItemPosition()), nv.isDangNhap());
+                            suaThongTinNhanVien(updateNV);
+                        }
                     }
                 } else if (tvTitle.getText().equals("Thêm mới nhân viên")) {
                     myRef.child("NhanVien").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -263,12 +309,28 @@ public class QuanLyNhanVienChiTietFragment extends Fragment {
         });
     }
 
-    private void suaThongTinNhanVien(NhanVien updateNV){
+    private void suaThongTinNhanVien(final NhanVien updateNV){
         updateNV.setMaNhanVien(nv.getMaNhanVien());
-        Map<String, Object> nvMapValues = updateNV.toMap();
-
-        myRef.child("NhanVien").child(pushkeyNVHienTai).updateChildren(nvMapValues);
-        Toast.makeText(getActivity(), "Đã cập nhật thông tin nhân viên " + updateNV.getMaNhanVien(), Toast.LENGTH_LONG).show();
+        Map<String, Object> nvMapValues = new HashMap<>();
+        if (updateNV.getChucVu().equals("QuanLy")) {
+            nvMapValues = updateNV.toMapQuanLy();
+        } else {
+            nvMapValues = updateNV.toMap();
+        }
+        myRef.child("NhanVien").child(pushkeyNVHienTai).updateChildren(nvMapValues).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (nv.getChucVu().equals("QuanLy") && !updateNV.getChucVu().equals("QuanLy")) {
+                    myRef.child("NhanVien").child(pushkeyNVHienTai).child("matKhau").removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(getActivity(), "Đã cập nhật thông tin nhân viên " + updateNV.getTenNhanVien(), Toast.LENGTH_LONG).show();
+                            edtMatKhau.setText("");
+                        }
+                    });
+                }
+            }
+        });
     }
 
     private void alertErrorDataInput() {
@@ -336,6 +398,8 @@ public class QuanLyNhanVienChiTietFragment extends Fragment {
         spnChucVu.setEnabled(b);
         btnSua.setEnabled(b);
         btnLuu.setEnabled(b);
+
+        edtMatKhau.setEnabled(b);
     }
 
     private void clearAlertErrorDataInput() {
