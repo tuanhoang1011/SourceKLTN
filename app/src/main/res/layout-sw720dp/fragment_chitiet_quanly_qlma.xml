@@ -124,6 +124,17 @@
                     android:text="Giá"
                     android:textSize="@dimen/item_textsize_quanly" />
 
+                <!--<EditText-->
+                    <!--android:id="@+id/edt_gia_chitiet_quanly_qlma"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:layout_weight="3"-->
+                    <!--android:ems="10"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:inputType="numberDecimal"-->
+                    <!--android:textSize="@dimen/item_textsize_quanly" />-->
+
                 <EditText
                     android:id="@+id/edt_gia_chitiet_quanly_qlma"
                     android:layout_width="0dp"
@@ -132,8 +143,8 @@
                     android:layout_weight="3"
                     android:ems="10"
                     android:gravity="center_vertical"
-                    android:inputType="textMultiLine"
-                    android:textSize="@dimen/item_textsize_quanly" />
+                    android:inputType="textPersonName"
+                    android:textSize='@dimen/item_textsize_quanly' />
             </LinearLayout>
 
             <LinearLayout

@@ -76,8 +76,6 @@ public class QuanLyMonAnChiTietFragment extends Fragment{
 
     //var
     private boolean mStoragePermissions;
-    private Uri mSelectedImageUri;
-    private Bitmap mSelectedImageBitmap;
     private byte[] mBytes;
     private double progress;
     private ProgressBar mProgressBar;
@@ -88,6 +86,9 @@ public class QuanLyMonAnChiTietFragment extends Fragment{
     public static final int RESPONSE_CODE_CTMA = 2222;
     private static final double MB_THRESHHOLD = 5.0;
     private static final double MB = 1000000.0;
+
+    private Uri imageUri;
+    private Bitmap bitmap;
 
     public QuanLyMonAnChiTietFragment() {
     }
@@ -316,11 +317,11 @@ public class QuanLyMonAnChiTietFragment extends Fragment{
                 myRef.child("NhomHang").child(pushkeynhomhang).child("danhSachMonAn").push().setValue(newMA).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-//                        if(mSelectedImageUri != null){
-//                            uploadNewPhoto(mSelectedImageUri);
-//                        }else if(mSelectedImageBitmap  != null){
-//                            uploadNewPhoto(mSelectedImageBitmap);
-//                        }
+                        if(imageUri != null){
+                            uploadNewPhoto(imageUri);
+                        }else if(bitmap  != null){
+                            uploadNewPhoto(bitmap);
+                        }
 
                         Toast.makeText(getActivity(), "Đã thêm món ăn " + newMA.getTenMonAn(), Toast.LENGTH_LONG).show();
                     }
@@ -348,10 +349,10 @@ public class QuanLyMonAnChiTietFragment extends Fragment{
                     myRef.child("NhomHang").child(nhomHangArrayList.get(snMaNhomHang.getSelectedItemPosition()).getPushKey()).child("danhSachMonAn").child(ma.getPushKey()).updateChildren(maMapValues).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-//                            if(mSelectedImageUri != null){
-//                                uploadNewPhoto(mSelectedImageUri);
-//                            }else if(mSelectedImageBitmap  != null){
-//                                uploadNewPhoto(mSelectedImageBitmap);
+//                            if(imageUri != null){
+//                                uploadNewPhoto(imageUri);
+//                            } else if(bitmap  != null){
+//                                uploadNewPhoto(bitmap);
 //                            }
 
                             Toast.makeText(getActivity(), "Đã cập nhật món ăn " + updateMA.getTenMonAn(), Toast.LENGTH_LONG).show();
@@ -363,10 +364,10 @@ public class QuanLyMonAnChiTietFragment extends Fragment{
             myRef.child("NhomHang").child(nhomHangArrayList.get(snMaNhomHang.getSelectedItemPosition()).getPushKey()).child("danhSachMonAn").child(ma.getPushKey()).updateChildren(maMapValues).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
-//                    if(mSelectedImageUri != null){
-//                        uploadNewPhoto(mSelectedImageUri);
-//                    }else if(mSelectedImageBitmap  != null){
-//                        uploadNewPhoto(mSelectedImageBitmap);
+//                    if(imageUri != null){
+//                        uploadNewPhoto(imageUri);
+//                    } else if(bitmap  != null){
+//                        uploadNewPhoto(bitmap);
 //                    }
 
                     Toast.makeText(getActivity(), "Đã cập nhật món ăn " + updateMA.getTenMonAn(), Toast.LENGTH_LONG).show();
@@ -519,7 +520,8 @@ public class QuanLyMonAnChiTietFragment extends Fragment{
         }
 
         @Override
-        protected byte[] doInBackground(Uri... params ) {
+        protected byte[] doInBackground(Uri... params )
+        {
             Log.d("", "doInBackground: started.");
 
             if(mBitmap == null){
@@ -632,7 +634,7 @@ public class QuanLyMonAnChiTietFragment extends Fragment{
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == ThayDoiAnhMonAnActivity.PICKFILE_REQUEST_CODE) {
-            Uri imageUri = data.getParcelableExtra("uriImageSelected");
+            imageUri = data.getParcelableExtra("uriImageSelected");
 
             ImageLoader imageLoader = ImageLoader.getInstance();
             imageLoader.init(ImageLoaderConfiguration.createDefault(getContext()));
@@ -643,7 +645,7 @@ public class QuanLyMonAnChiTietFragment extends Fragment{
         } else if (resultCode == ThayDoiAnhMonAnActivity.CAMERA_REQUEST_CODE) {
             Bundle bundle = data.getBundleExtra("datacamera");
             byte[] imageTook = bundle.getByteArray("bitmapTook");
-            Bitmap bitmap = BitmapFactory.decodeByteArray(imageTook, 0, imageTook.length);
+            bitmap = BitmapFactory.decodeByteArray(imageTook, 0, imageTook.length);
             imgMonAn.setImageBitmap(bitmap);
             uploadNewPhoto(bitmap);
         }

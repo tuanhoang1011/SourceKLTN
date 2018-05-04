@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.util.List;
 
@@ -48,7 +50,15 @@ public class QuanLyMonAnDanhSachAdapter extends ArrayAdapter<MonAn> {
             final MonAn ma = myArray.get(position);
 
             final ImageView imgMonAn = (ImageView) convertView.findViewById(R.id.img_anhmonan_item_quanly_qlma);
-            imgMonAn.setImageResource(R.drawable.icon_nhomhang);
+
+            if (ma.getUrlAnh() != null) {
+                ImageLoader imageLoader = ImageLoader.getInstance();
+                imageLoader.init(ImageLoaderConfiguration.createDefault(getContext()));
+                imageLoader.displayImage(ma.getUrlAnh().toString(), imgMonAn);
+            } else {
+                imgMonAn.setImageResource(R.drawable.icon_nhomhang);
+            }
+
             final TextView tvMaMA = (TextView) convertView.findViewById(R.id.tv_mama_item_quanly_qlma);
             tvMaMA.setText("Mã: " + ma.getMaMonAn());
             final TextView tvTenMA = (TextView) convertView.findViewById(R.id.tv_tenma_item_quanly_qlma);
